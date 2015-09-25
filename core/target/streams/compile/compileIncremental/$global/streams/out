@@ -1,0 +1,39 @@
+[0m[[0mdebug[0m] [0m[0m
+[0m[[0mdebug[0m] [0mInitial source changes: [0m
+[0m[[0mdebug[0m] [0m	removed:Set()[0m
+[0m[[0mdebug[0m] [0m	added: Set(C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\ParseArguments.scala)[0m
+[0m[[0mdebug[0m] [0m	modified: Set()[0m
+[0m[[0mdebug[0m] [0mRemoved products: Set(C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\Columns.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\CreateTemporaryFiles$$anonfun$readFilesInDirectory$1.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\TableDefinition.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\Columns$.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\TableName.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\TableName$.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\BaseTest.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\CreateTemporaryFiles$$anonfun$createFile$1.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\CreateTemporaryFiles$$anonfun$2.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\CreateTemporaryFiles.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\CreateTemporaryFiles$$anonfun$1.class, C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes\com\recipegrace\biglibrary\core\CreateTemporaryFiles$class.class)[0m
+[0m[[0mdebug[0m] [0mExternal API changes: API Changes: Set()[0m
+[0m[[0mdebug[0m] [0mModified binary dependencies: Set()[0m
+[0m[[0mdebug[0m] [0mInitial directly invalidated sources: Set(C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\ParseArguments.scala)[0m
+[0m[[0mdebug[0m] [0m[0m
+[0m[[0mdebug[0m] [0mSources indirectly invalidated by:[0m
+[0m[[0mdebug[0m] [0m	product: Set(C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\TableDefinition.scala, C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\CreateTemporaryFiles.scala, C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\BaseTest.scala)[0m
+[0m[[0mdebug[0m] [0m	binary dep: Set()[0m
+[0m[[0mdebug[0m] [0m	external source: Set()[0m
+[0m[[0mdebug[0m] [0mAll initially invalidated sources: Set(C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\ParseArguments.scala, C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\TableDefinition.scala, C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\CreateTemporaryFiles.scala, C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\BaseTest.scala)[0m
+[0m[[0mdebug[0m] [0mRecompiling all 4 sources: invalidated sources (4) exceeded 50.0% of all sources[0m
+[0m[[0minfo[0m] [0mCompiling 4 Scala sources to C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes...[0m
+[0m[[0mdebug[0m] [0mGetting compiler-interface from component compiler for Scala 2.10.4[0m
+[0m[[0mdebug[0m] [0mGetting compiler-interface from component compiler for Scala 2.10.4[0m
+[0m[[0mdebug[0m] [0mRunning cached compiler f4eedd4, interfacing (CompilerInterface) with Scala compiler version 2.10.4[0m
+[0m[[0mdebug[0m] [0mCalling Scala compiler with arguments  (CompilerInterface):[0m
+[0m[[0mdebug[0m] [0m	-bootclasspath[0m
+[0m[[0mdebug[0m] [0m	C:\Program Files\Java\jre1.8.0_60\lib\resources.jar;C:\Program Files\Java\jre1.8.0_60\lib\rt.jar;C:\Program Files\Java\jre1.8.0_60\lib\sunrsasign.jar;C:\Program Files\Java\jre1.8.0_60\lib\jsse.jar;C:\Program Files\Java\jre1.8.0_60\lib\jce.jar;C:\Program Files\Java\jre1.8.0_60\lib\charsets.jar;C:\Program Files\Java\jre1.8.0_60\lib\jfr.jar;C:\Program Files\Java\jre1.8.0_60\classes;C:\Users\fxj6302\.sbt\boot\scala-2.10.4\lib\scala-library.jar[0m
+[0m[[0mdebug[0m] [0m	-classpath[0m
+[0m[[0mdebug[0m] [0m	C:\Users\fxj6302\Downloads\BigLibrary\core\target\scala-2.10\classes;C:\Users\fxj6302\.ivy2\cache\org.scalatest\scalatest_2.10\bundles\scalatest_2.10-2.2.5.jar;C:\Users\fxj6302\.ivy2\cache\org.scala-lang\scala-reflect\jars\scala-reflect-2.10.5.jar;C:\Users\fxj6302\.ivy2\cache\org.slf4j\slf4j-simple\jars\slf4j-simple-1.7.12.jar;C:\Users\fxj6302\.ivy2\cache\org.slf4j\slf4j-api\jars\slf4j-api-1.7.12.jar;C:\Users\fxj6302\.ivy2\cache\net.sf.jopt-simple\jopt-simple\jars\jopt-simple-4.9.jar;C:\Users\fxj6302\.ivy2\cache\com.typesafe.scala-logging\scala-logging-slf4j_2.10\jars\scala-logging-slf4j_2.10-2.1.2.jar;C:\Users\fxj6302\.ivy2\cache\com.typesafe.scala-logging\scala-logging-api_2.10\jars\scala-logging-api_2.10-2.1.2.jar[0m
+[0m[[0mdebug[0m] [0mScala compilation took 4.475945353 s[0m
+[0m[[0mdebug[0m] [0mInvalidating C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\ParseArguments.scala...[0m
+[0m[[0mdebug[0m] [0mInvalidating (transitively) by inheritance from C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\ParseArguments.scala...[0m
+[0m[[0mdebug[0m] [0mInitial set of included nodes: Set(C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\ParseArguments.scala)[0m
+[0m[[0mdebug[0m] [0mInvalidated by transitive inheritance dependency: Set(C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\ParseArguments.scala)[0m
+[0m[[0mdebug[0m] [0mThe C:\Users\fxj6302\Downloads\BigLibrary\core\src\main\scala\com\recipegrace\biglibrary\core\ParseArguments.scala source file has the following regular definitions changed:[0m
+[0m[[0mdebug[0m] [0m	notify, Argument, name, wait, copy$default$2, $asInstanceOf, productArity, isRequired, equals, asInstanceOf, synchronized, $isInstanceOf, canEqual, productPrefix, notifyAll, isInstanceOf, <init>, parse, ==, clone, default, $init$, copy$default$3, copy, toString, !=, getClass, copy$default$1, ne, eq, ParseArguments, productIterator, ##, finalize, productElement, hashCode.[0m
+[0m[[0mdebug[0m] [0mAll member reference dependencies will be considered within this context.[0m
+[0m[[0mdebug[0m] [0mNew invalidations:[0m
+[0m[[0mdebug[0m] [0m	Set()[0m
+[0m[[0mdebug[0m] [0mInitial set of included nodes: Set()[0m
+[0m[[0mdebug[0m] [0mPreviously invalidated, but (transitively) depend on new invalidations:[0m
+[0m[[0mdebug[0m] [0m	Set()[0m
+[0m[[0mdebug[0m] [0mAll newly invalidated sources after taking into account (previously) recompiled sources:Set()[0m

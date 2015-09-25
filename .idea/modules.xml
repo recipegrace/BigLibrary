@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/biglibrary.iml" filepath="$PROJECT_DIR$/.idea/modules/biglibrary.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/biglibrary-build.iml" filepath="$PROJECT_DIR$/.idea/modules/biglibrary-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core.iml" filepath="$PROJECT_DIR$/.idea/modules/core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/core-build.iml" filepath="$PROJECT_DIR$/.idea/modules/core-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/electric.iml" filepath="$PROJECT_DIR$/.idea/modules/electric.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/electric-build.iml" filepath="$PROJECT_DIR$/.idea/modules/electric-build.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/electricexamples.iml" filepath="$PROJECT_DIR$/.idea/modules/electricexamples.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/electricexamples-build.iml" filepath="$PROJECT_DIR$/.idea/modules/electricexamples-build.iml" />
+    </modules>
+  </component>
+</project>

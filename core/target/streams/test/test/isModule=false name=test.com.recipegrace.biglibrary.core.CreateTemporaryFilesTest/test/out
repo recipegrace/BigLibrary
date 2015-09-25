@@ -1,0 +1,14 @@
+[0m[[0minfo[0m] [0m[32mCreateTemporaryFilesTest:[0m[0m
+[0m[[0minfo[0m] [0m[31m- test temporary files *** FAILED ***[0m[0m
+[0m[[0minfo[0m] [0m[31m  java.nio.file.AccessDeniedException: C:\Users\fxj6302\Downloads\BigLibrary\.tests\out1443195444915[0m[0m
+[0m[[0minfo[0m] [0m[31m  at sun.nio.fs.WindowsException.translateToIOException(Unknown Source)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at sun.nio.fs.WindowsException.rethrowAsIOException(Unknown Source)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at sun.nio.fs.WindowsFileSystemProvider.newByteChannel(Unknown Source)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at java.nio.file.Files.newByteChannel(Unknown Source)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at java.nio.file.Files.newByteChannel(Unknown Source)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at java.nio.file.spi.FileSystemProvider.newInputStream(Unknown Source)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at java.nio.file.Files.newInputStream(Unknown Source)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at java.nio.file.Files.newBufferedReader(Unknown Source)[0m[0m
+[0m[[0minfo[0m] [0m[31m  at java.nio.file.Files.readAllLines(Unknown Source)[0m[0m
+[0m[[0minfo[0m] [0m[31m  ...[0m[0m

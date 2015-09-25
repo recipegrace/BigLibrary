@@ -1,0 +1,11 @@
+[0m[[0minfo[0m] [0mPackaging C:\Users\fxj6302\Downloads\BigLibrary\electric\target\scala-2.10\electric_2.10-0.0.2-sources.jar ...[0m
+[0m[[0mdebug[0m] [0mInput file mappings:[0m
+[0m[[0mdebug[0m] [0m	com\recipegrace\biglibrary\electric\ElectricJob.scala[0m
+[0m[[0mdebug[0m] [0m	  C:\Users\fxj6302\Downloads\BigLibrary\electric\src\main\scala\com\recipegrace\biglibrary\electric\ElectricJob.scala[0m
+[0m[[0mdebug[0m] [0m	com\recipegrace\biglibrary\electric\ElectricJobTest.scala[0m
+[0m[[0mdebug[0m] [0m	  C:\Users\fxj6302\Downloads\BigLibrary\electric\src\main\scala\com\recipegrace\biglibrary\electric\ElectricJobTest.scala[0m
+[0m[[0mdebug[0m] [0m	com\recipegrace\biglibrary\electric\Launcher.scala[0m
+[0m[[0mdebug[0m] [0m	  C:\Users\fxj6302\Downloads\BigLibrary\electric\src\main\scala\com\recipegrace\biglibrary\electric\Launcher.scala[0m
+[0m[[0mdebug[0m] [0m	com\recipegrace\biglibrary\electric\SequentialFileAccess.scala[0m
+[0m[[0mdebug[0m] [0m	  C:\Users\fxj6302\Downloads\BigLibrary\electric\src\main\scala\com\recipegrace\biglibrary\electric\SequentialFileAccess.scala[0m
+[0m[[0minfo[0m] [0mDone packaging.[0m
