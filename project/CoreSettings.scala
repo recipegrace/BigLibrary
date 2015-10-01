@@ -44,7 +44,6 @@ object CoreSettings {
       "org.slf4j" % "slf4j-simple" % "1.7.12",
       "net.sf.jopt-simple" % "jopt-simple" % "4.9",
   "com.typesafe.scala-logging" % "scala-logging-slf4j_2.10" % "2.1.2"),
-    publishTo := Some(Resolvers.publishTo),
     resolvers ++= Resolvers.allResolvers)
 
   val electricSettings = Seq(
@@ -62,6 +61,8 @@ object CoreSettings {
 
       Libraries.sparkCore)
   )
+  
+
 
   object Libraries {
     val sparkCore = "org.apache.spark" %% "spark-core" % sparkVersion % "provided"
