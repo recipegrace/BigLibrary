@@ -1,4 +1,0 @@
-[0m[[0minfo[0m] [0m:: delivering :: com.recipegrace.electric#electricexamples_2.10;0.0.2 :: 0.0.2 :: release :: Fri Sep 25 15:43:55 EDT 2015[0m
-[0m[[0mdebug[0m] [0m	options = status=release pubdate=Fri Sep 25 15:43:55 EDT 2015 validate=true resolveDynamicRevisions=true merge=true resolveId=null pubBranch=null[0m
-[0m[[0minfo[0m] [0m	delivering ivy file to C:\Users\fxj6302\Downloads\BigLibrary\electricexamples\target\scala-2.10\ivy-0.0.2.xml[0m
-[0m[[0mdebug[0m] [0m	deliver done (60ms)[0m
