@@ -6,7 +6,7 @@ object CoreSettings {
 
 
   val sparkVersion = "1.3.1"
-  val currentScalaVersion ="2.10.4"
+  val currentScalaVersion ="2.11.5"
   val currentVersion="0.0.2"
   val organizationName="com.recipegrace.electric"
 
@@ -43,7 +43,7 @@ object CoreSettings {
       "org.scalatest" %% "scalatest" % "2.2.5",
       "org.slf4j" % "slf4j-simple" % "1.7.12",
       "net.sf.jopt-simple" % "jopt-simple" % "4.9",
-  "com.typesafe.scala-logging" % "scala-logging-slf4j_2.10" % "2.1.2"),
+  "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2"),
     resolvers ++= Resolvers.allResolvers)
 
   val electricSettings = Seq(
