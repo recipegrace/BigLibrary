@@ -3,11 +3,12 @@ package com.recipegrace.biglibrary.core
 /**
  * Created by Ferosh Jacob on 10/11/15.
  */
+
 import scala.language.experimental.macros
 import scala.reflect.macros.whitebox.Context
 
 trait Mappable[T] {
-  def fromList(args:Array[Any]):T
+  def fromList(args: Array[Any]): T
 
 
 }

@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory
  * Created by FXJ6302 on 9/25/2015.
  */
 
-case class Argument(name:String, isRequired:Boolean=true, default:String="")
+case class Argument(name: String, isRequired: Boolean = true, default: String = "")
 
 object ParseArguments {
 
@@ -26,23 +26,23 @@ object ParseArguments {
   }
 
 
-    def stringToAny[T](args:Array[String]):Array[Any] = {
-      args.grouped(2).map(f=> (f(0).split("--",-1)(1),toAny(f(1)))).map(f=> List(f._1,f._2)).flatten.toArray
-    }
+  def stringToAny[T](args: Array[String]): Array[Any] = {
+    args.grouped(2).map(f => (f(0).split("--", -1)(1), toAny(f(1)))).map(f => List(f._1, f._2)).flatten.toArray
+  }
 
-    def toAny(x:String) = {
-      x.trim.toUpperCase() match {
+  def toAny(x: String) = {
+    x.trim.toUpperCase() match {
 
-        case "TRUE" =>  true
-        case "FALSE" => false
-        case _ => {
-          if(x.forall(_.isDigit)) x.toInt
-          else if(x.matches("[+-]?\\d+.?\\d+")	) x.toDouble
-          else x
-        }
+      case "TRUE" => true
+      case "FALSE" => false
+      case _ => {
+        if (x.forall(_.isDigit)) x.toInt
+        else if (x.matches("[+-]?\\d+.?\\d+")) x.toDouble
+        else x
       }
     }
   }
+}
 
 
 

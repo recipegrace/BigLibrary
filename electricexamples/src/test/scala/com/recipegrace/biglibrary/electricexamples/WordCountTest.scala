@@ -6,12 +6,12 @@ import com.recipegrace.biglibrary.electric.tests.SimpleJobTest
 /**
  * Created by fjacob on 9/25/15.
  */
-class WordCountTest extends SimpleJobTest{
+class WordCountTest extends SimpleJobTest {
 
   test("wordcount test with spark") {
 
 
-    val input= createFile{
+    val input = createFile {
       """
         hello world
         Zero world
@@ -19,9 +19,9 @@ class WordCountTest extends SimpleJobTest{
       """.stripMargin
     }
 
-    val output= createTempPath()
+    val output = createTempPath()
 
-    launch(WordCount, TwoArgument(input,output))
+    launch(WordCount, TwoArgument(input, output))
 
     val lines = readFilesInDirectory(output, "part")
     lines should contain("hello\t1")

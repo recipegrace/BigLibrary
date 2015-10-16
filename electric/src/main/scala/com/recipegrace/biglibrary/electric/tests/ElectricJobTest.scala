@@ -11,9 +11,12 @@ trait ElectricJobTest[T] extends BaseTest with Launcher[T] {
 
 
 }
+
 trait SimpleJobTest extends ElectricJobTest[TwoArgument] {}
+
 trait OutputOnlyJobTest extends ElectricJobTest[OneArgument] {}
-trait TwoInputJobTest extends ElectricJobTest[ThreeArgument]{}
+
+trait TwoInputJobTest extends ElectricJobTest[ThreeArgument] {}
 
 
 

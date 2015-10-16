@@ -6,14 +6,12 @@ import com.recipegrace.biglibrary.electric.tests.OutputOnlyJobTest
 /**
  * Created by fjacob on 9/25/15.
  */
-class GenerateNumbersTest extends OutputOnlyJobTest{
+class GenerateNumbersTest extends OutputOnlyJobTest {
 
   test("generate number") {
 
 
-
-
-    val output= createTempPath()
+    val output = createTempPath()
 
     launch(GenerateNumbers, OneArgument(output))
 

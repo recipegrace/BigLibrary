@@ -29,7 +29,7 @@ trait CreateTemporaryFiles {
   }
 
   def createFile(content: String): String = {
-     val path = createTempPath()
+    val path = createTempPath()
     createFileWithContent(content.split("\\r?\\n"), path)
 
     Thread.sleep(500)
@@ -45,6 +45,7 @@ trait CreateTemporaryFiles {
   }
 
   val random = new Random(System.currentTimeMillis())
+
   def createOutPutFile(createFile: Boolean = true): String = {
 
     val temporaryDirectory = ".tests"
@@ -53,7 +54,7 @@ trait CreateTemporaryFiles {
     if (!directory.exists()) new File(temporaryDirectory).mkdir()
 
     val outFile = if (createFile) {
-      val tempFile = Files.createTempFile(Paths.get(temporaryDirectory), "out", getFileName )
+      val tempFile = Files.createTempFile(Paths.get(temporaryDirectory), "out", getFileName)
       tempFile.toAbsolutePath.toString;
     } else {
       val tempFile = new File(temporaryDirectory, "out" + getFileName)
@@ -68,11 +69,9 @@ trait CreateTemporaryFiles {
     System.currentTimeMillis() + "" + random.nextFloat()
   }
 
-  def createTempPath():String = {
+  def createTempPath(): String = {
     createOutPutFile(false)
   }
-
-
 
 
 }

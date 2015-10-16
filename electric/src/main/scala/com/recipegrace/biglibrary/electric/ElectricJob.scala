@@ -40,12 +40,13 @@ trait ElectricJob[T] {
 
     run(toArray(args), true)
   }
+
   def runLocal(args: T) = {
 
     run(args, true)
   }
 
-  def run(args: T, isLocal: Boolean):Unit = {
+  def run(args: T, isLocal: Boolean): Unit = {
     val logger = Logger(LoggerFactory.getLogger("ElectricJob"))
     logger.info("starting job:" + jobName)
     val jars = if (isLocal) List() else List(SparkContext.jarOfObject(this).get)
@@ -61,7 +62,7 @@ trait ElectricJob[T] {
     sc.stop()
   }
 
-  def run(args: Array[String], isLocal: Boolean):Unit = {
+  def run(args: Array[String], isLocal: Boolean): Unit = {
 
 
     ParseArguments.parse(args) match {

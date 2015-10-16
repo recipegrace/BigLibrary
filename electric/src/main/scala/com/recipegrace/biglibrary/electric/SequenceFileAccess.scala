@@ -40,27 +40,28 @@ trait SequenceFileAccess {
 
     }
   }
-  def readFile(file:String)(implicit sc: ElectricContext):RDD[String] ={
-    readFile(file,true)
-  }
-  def readFile(file:String, isSequence:Boolean)(implicit sc: ElectricContext):RDD[String] ={
 
-    if(sc.isLocal|| !isSequence) {
+  def readFile(file: String)(implicit sc: ElectricContext): RDD[String] = {
+    readFile(file, true)
+  }
+
+  def readFile(file: String, isSequence: Boolean)(implicit sc: ElectricContext): RDD[String] = {
+
+    if (sc.isLocal || !isSequence) {
       sc.sparkContext.textFile(file)
-    }else {
+    } else {
       sc.sparkContext.sequenceFile[Text,Text](file)
-        .map(f=> f._2.toString)
+        .map(f => f._2.toString)
 
     }
   }
 
 
-
-  def writeFile[T](result:RDD[T],file:String)(implicit sc: ElectricContext) ={
-     val stringRDD = result.map(f=>f.toString)
-    if(sc.isLocal) stringRDD.saveAsTextFile(file)
+  def writeFile[T](result: RDD[T], file: String)(implicit sc: ElectricContext) = {
+    val stringRDD = result.map(f => f.toString)
+    if (sc.isLocal) stringRDD.saveAsTextFile(file)
     else {
-      stringRDD.map(f=> ("",f))
+      stringRDD.map(f => ("", f))
         .saveAsSequenceFile(file)
     }
   }

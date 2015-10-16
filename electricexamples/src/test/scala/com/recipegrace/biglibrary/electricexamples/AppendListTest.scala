@@ -6,14 +6,12 @@ import com.recipegrace.biglibrary.electric.tests.TwoInputJobTest
 /**
  * Created by fjacob on 9/25/15.
  */
-class AppendListTest extends TwoInputJobTest{
+class AppendListTest extends TwoInputJobTest {
 
   test("append list test") {
 
 
-
-
-    val one = createFile{
+    val one = createFile {
       """ 1
         2 """
         .stripMargin
@@ -26,7 +24,7 @@ class AppendListTest extends TwoInputJobTest{
     }
 
     val output = createTempPath()
-    launch(AppendList, ThreeArgument(one,two, output))
+    launch(AppendList, ThreeArgument(one, two, output))
 
     val lines = readFilesInDirectory(output, "part")
     lines should contain("1")

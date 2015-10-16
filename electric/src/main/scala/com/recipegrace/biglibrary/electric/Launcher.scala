@@ -13,7 +13,6 @@ trait Launcher[T] extends CreateTemporaryFiles {
   }
 
 
-
   def readSparkOut(dir: String) = {
     readFilesInDirectory(dir, "part")
   }
