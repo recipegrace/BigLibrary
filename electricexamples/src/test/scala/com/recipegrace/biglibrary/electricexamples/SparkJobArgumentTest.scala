@@ -1,5 +1,6 @@
 package com.recipegrace.biglibrary.electricexamples
 
+import com.recipegrace.biglibrary.core.Mappable
 import com.recipegrace.biglibrary.core.ParseArguments._
 import com.recipegrace.biglibrary.electric.tests.ElectricJobTest
 
@@ -24,15 +25,8 @@ class SparkJobArgumentTest extends ElectricJobTest[ExampleInput] {
 
 
 
-  test("wrong single argument test") {
-    intercept[Exception] {
 
-    val list = Array("--input" )
-    val exampleInput= parse[ExampleInput](list)
-     println(exampleInput)
-     }
 
-  }
 
 
 }
