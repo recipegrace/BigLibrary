@@ -16,11 +16,9 @@ class CreateTemporaryFilesTest extends BaseTest with CreateTemporaryFiles {
     if (dir.exists)
       for (file <- dir.listFiles()) file.delete()
 
-    val tempFile = createOutPutFile(true)
 
     val text = "hola"
 
-    createFile(text, tempFile)
     val lines = readFilesInDirectory(tempFolder)
 
     lines should contain(text)
