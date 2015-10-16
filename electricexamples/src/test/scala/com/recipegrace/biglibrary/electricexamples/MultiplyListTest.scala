@@ -1,7 +1,6 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.jobs.ThreeArgument
-import com.recipegrace.biglibrary.electric.tests.{ElectricJobTest, TwoInputJobTest}
+import com.recipegrace.biglibrary.electric.tests.ElectricJobTest
 
 /**
  * Created by fjacob on 9/25/15.

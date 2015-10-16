@@ -1,7 +1,7 @@
 package com.recipegrace.biglibrary.electricexamples
 
+import com.recipegrace.biglibrary.electric.ElectricContext
 import com.recipegrace.biglibrary.electric.jobs.SimpleJob
-import com.recipegrace.biglibrary.electric.{ElectricContext, SequenceFileAccess, ElectricJob}
 
 
 /**

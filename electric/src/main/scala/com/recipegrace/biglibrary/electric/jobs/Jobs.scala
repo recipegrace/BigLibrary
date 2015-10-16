@@ -1,7 +1,7 @@
 package com.recipegrace.biglibrary.electric.jobs
 
 import com.recipegrace.biglibrary.core.Mappable
-import com.recipegrace.biglibrary.electric.{SequenceFileAccess, ElectricContext, ElectricJob}
+import com.recipegrace.biglibrary.electric.{ElectricContext, ElectricJob, SequenceFileAccess}
 
 /**
  * Created by Ferosh Jacob on 10/16/15.

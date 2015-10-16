@@ -2,7 +2,6 @@ package com.recipegrace.biglibrary.electric.tests
 
 import com.recipegrace.biglibrary.core.BaseTest
 import com.recipegrace.biglibrary.electric.Launcher
-
 import com.recipegrace.biglibrary.electric.jobs._
 
 /**

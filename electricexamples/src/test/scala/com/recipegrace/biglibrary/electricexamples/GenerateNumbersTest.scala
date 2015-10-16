@@ -1,8 +1,7 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.tests.{OutputOnlyJobTest, SimpleJobTest}
-
 import com.recipegrace.biglibrary.electric.jobs._
+import com.recipegrace.biglibrary.electric.tests.OutputOnlyJobTest
 
 /**
  * Created by fjacob on 9/25/15.

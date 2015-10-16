@@ -1,9 +1,7 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.core.Mappable
 import com.recipegrace.biglibrary.core.ParseArguments._
 import com.recipegrace.biglibrary.electric.tests.ElectricJobTest
-import com.recipegrace.biglibrary.electric.{ElectricContext, ElectricJob}
 
 
 /**
