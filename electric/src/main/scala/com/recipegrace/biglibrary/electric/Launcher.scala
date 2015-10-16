@@ -5,12 +5,14 @@ import com.recipegrace.biglibrary.core.CreateTemporaryFiles
 /**
  * Created by fjacob on 9/25/15.
  */
-trait Launcher extends CreateTemporaryFiles {
+trait Launcher[T] extends CreateTemporaryFiles {
 
 
-  def launch(sparkJob: ElectricJob, args: Map[String, String]) = {
+  def launch(sparkJob: ElectricJob[T], args: T) = {
     sparkJob.runLocal(args)
   }
+
+
 
   def readSparkOut(dir: String) = {
     readFilesInDirectory(dir, "part")

@@ -1,18 +1,21 @@
 package com.recipegrace.biglibrary.electric
 
-import com.recipegrace.biglibrary.core.{Argument, ParseArguments}
+import com.recipegrace.biglibrary.core.{Mappable, ParseArguments}
+import com.typesafe.scalalogging.Logger
 import org.apache.spark.{SparkConf, SparkContext}
+import org.slf4j.LoggerFactory
 
 
 /**
  * Created by ferosh on 9/25/15.
  */
 
-case class ElectricContext( isLocal:Boolean, sparkContext: SparkContext)
+case class ElectricContext(isLocal: Boolean, sparkContext: SparkContext)
 
-trait ElectricJob  extends ParseArguments{
+trait ElectricJob[T] {
 
-  val namedArguments:Set[Argument]=Set()
+
+  implicit def argumentType: Mappable[T]
 
   def jobName: String = this.getClass.getName
 
@@ -21,31 +24,30 @@ trait ElectricJob  extends ParseArguments{
     case x => Iterator(x)
   }
 
-  def job(args: Map[Argument, String], sc: ElectricContext)
+  def job(t: T)(implicit sc: ElectricContext)
 
-  def parseArgs(strings: Array[String], names:Set[Argument]): Map[Argument, String] = {
-
-    parse(strings,names)
-  }
 
   def main(args: Array[String]) = {
 
     run(args, false)
   }
 
-  def toArray(args: Map[String, String]): Array[String] = {
-
-    args.toList.flatMap(f => List("--" + f._1, f._2)).toArray
+  def toArray(args: Map[String, Any]): Array[String] = {
+    args.toList.flatMap(f => List("--" + f._1, f._2.toString)).toArray
   }
 
-  def runLocal(args: Map[String, String]) = {
+  def runLocal(args: Map[String, Any]) = {
 
     run(toArray(args), true)
   }
+  def runLocal(args: T) = {
 
-  def run(args: Array[String], isLocal: Boolean) = {
+    run(args, true)
+  }
 
-
+  def run(args: T, isLocal: Boolean):Unit = {
+    val logger = Logger(LoggerFactory.getLogger("ElectricJob"))
+    logger.info("starting job:" + jobName)
     val jars = if (isLocal) List() else List(SparkContext.jarOfObject(this).get)
 
     val sc: SparkContext = {
@@ -54,9 +56,21 @@ trait ElectricJob  extends ParseArguments{
         conf.setMaster("local")
       new SparkContext(conf)
     }
+    implicit val context = ElectricContext(isLocal, sc)
+    job(args)(context)
+    sc.stop()
+  }
 
-    val programArguments = parseArgs(args, namedArguments)
-    job(programArguments, ElectricContext(isLocal, sc))
+  def run(args: Array[String], isLocal: Boolean):Unit = {
+
+
+    ParseArguments.parse(args) match {
+      case Some(x) => {
+        run(x, isLocal)
+      }
+      case _ =>
+    }
+
 
   }
 
