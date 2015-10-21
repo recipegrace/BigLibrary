@@ -2,7 +2,7 @@ package com.recipegrace.biglibrary.electricexamples
 
 import com.recipegrace.biglibrary.electric.ElectricContext
 import com.recipegrace.biglibrary.electric.jobs.SimpleJob
-
+import org.apache.spark.SparkContext._
 
 /**
  * Created by fjacob on 9/25/15.

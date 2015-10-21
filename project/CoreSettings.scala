@@ -5,7 +5,7 @@ import sbtassembly.AssemblyKeys._
 object CoreSettings {
 
 
-  val sparkVersion = "1.3.1"
+  val sparkVersion = "1.2.1"
   val currentScalaVersion = "2.11.5"
   val currentVersion = "0.0.3"
   val organizationName = "com.recipegrace.electric"
