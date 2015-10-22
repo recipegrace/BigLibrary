@@ -6,8 +6,8 @@ object CoreSettings {
 
 
   val sparkVersion = "1.2.1"
-  val currentScalaVersion = "2.11.5"
-  val currentVersion = "0.0.3"
+  val currentScalaVersion = "2.10.5"
+  val currentVersion = "0.0.4"
   val organizationName = "com.recipegrace.electric"
 
   // sbt-assembly settings for building a fat jar
@@ -39,9 +39,11 @@ object CoreSettings {
     version := currentVersion,
     scalaVersion := currentScalaVersion,
     organization := organizationName,
+    test in assembly := {},
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "2.2.5",
-      "com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"),
+"com.typesafe.scala-logging" % "scala-logging-slf4j_2.10" % "2.1.2"),      
+//"com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"),
     resolvers ++= Resolvers.allResolvers)
 
   val electricSettings = Seq(

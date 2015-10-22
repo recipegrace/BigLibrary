@@ -4,7 +4,7 @@ import java.io.{File, PrintWriter}
 import java.nio.charset.{Charset, StandardCharsets}
 import java.nio.file.{Files, Paths}
 
-import com.typesafe.scalalogging.Logger
+import com.typesafe.scalalogging.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 import scala.collection.JavaConversions._

@@ -1,10 +1,8 @@
 package com.recipegrace.biglibrary.electric
 
-import com.recipegrace.biglibrary.core.{Mappable, ParseArguments}
-import com.typesafe.scalalogging.Logger
+import com.typesafe.scalalogging.slf4j.Logger
 import org.apache.spark.{SparkConf, SparkContext}
 import org.slf4j.LoggerFactory
-
 
 /**
  * Created by ferosh on 9/25/15.
@@ -15,7 +13,6 @@ case class ElectricContext(isLocal: Boolean, sparkContext: SparkContext)
 trait ElectricJob[T] {
 
 
-  implicit def argumentType: Mappable[T]
 
   def jobName: String = this.getClass.getName
 
@@ -62,17 +59,10 @@ trait ElectricJob[T] {
     sc.stop()
   }
 
+  def parse(args:Array[String]) :T
+
   def run(args: Array[String], isLocal: Boolean): Unit = {
-
-
-    ParseArguments.parse(args) match {
-      case Some(x) => {
-        run(x, isLocal)
-      }
-      case _ =>
-    }
-
-
+        run(parse(args), isLocal)
   }
 
 }

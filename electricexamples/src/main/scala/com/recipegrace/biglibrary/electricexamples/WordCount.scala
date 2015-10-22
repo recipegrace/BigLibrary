@@ -13,7 +13,7 @@ object WordCount extends SimpleJob {
 
   override def execute(input: String, output: String)(ec: ElectricContext) = {
     implicit val context = ec
-    val file = readFile(input)
+    val file = readFile(input,false)
     val words = file.flatMap(_.toLowerCase.replaceAll("[^a-zA-Z0-9\\s]", "").split("\\s+"))
     val wordCounts = words
       .map(x => (x, 1)).reduceByKey(_ + _)

@@ -3,6 +3,7 @@ package com.recipegrace.biglibrary.electric
 import com.recipegrace.biglibrary.core.TableDefinition
 import org.apache.hadoop.io.{LongWritable, Text}
 import org.apache.spark.SparkContext
+import org.apache.spark.SparkContext._
 import org.apache.spark.rdd.RDD
 
 import scala.reflect.ClassTag
@@ -61,7 +62,8 @@ trait SequenceFileAccess {
     val stringRDD = result.map(f => f.toString)
     if (sc.isLocal) stringRDD.saveAsTextFile(file)
     else {
-      stringRDD.map(f => ("", f))
+      stringRDD
+        .map(f => (1, f))
         .saveAsSequenceFile(file)
     }
   }
