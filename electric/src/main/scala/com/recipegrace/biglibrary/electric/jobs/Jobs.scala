@@ -11,10 +11,7 @@ trait SequenceFileJob[T] extends ElectricJob[T] with SequenceFileAccess {
 }
 trait ArgumentsToMap {
   def convertArgsToMap(args:Array[String]) = {
-    try {
       args.grouped(2).map(f=> (f(0).split("--")(1), f(1))).toMap
-    }
-
   }
 }
 
