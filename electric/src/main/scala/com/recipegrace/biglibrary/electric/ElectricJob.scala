@@ -35,7 +35,10 @@ trait ElectricJob[T] {
 
   def runLocal(args: Map[String, Any]) = {
 
+
+
     run(toArray(args), true)
+
   }
 
   def runLocal(args: T) = {
@@ -45,6 +48,7 @@ trait ElectricJob[T] {
 
   def run(args: T, isLocal: Boolean): Unit = {
     val logger = Logger(LoggerFactory.getLogger("ElectricJob"))
+    val t0 = System.currentTimeMillis()
     logger.info("starting job:" + jobName)
     val jars = if (isLocal) List() else List(SparkContext.jarOfObject(this).get)
 
@@ -57,6 +61,8 @@ trait ElectricJob[T] {
     implicit val context = ElectricContext(isLocal, sc)
     job(args)(context)
     sc.stop()
+    val t1 = System.currentTimeMillis()
+    logger.info("Elapsed time: " + (t1 - t0) + "ns")
   }
 
   def parse(args:Array[String]) :T
