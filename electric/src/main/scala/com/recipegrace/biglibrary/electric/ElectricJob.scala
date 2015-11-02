@@ -62,7 +62,7 @@ trait ElectricJob[T] {
     job(args)(context)
     sc.stop()
     val t1 = System.currentTimeMillis()
-    logger.info("Elapsed time: " + (t1 - t0) + "ns")
+    logger.info("Elapsed time: " + (t1 - t0) + "ms")
   }
 
   def parse(args:Array[String]) :T
