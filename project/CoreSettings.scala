@@ -6,7 +6,7 @@ object CoreSettings {
 
 
   val sparkVersion = "1.2.1"
-  val currentScalaVersion = "2.11.5"
+  val currentScalaVersion = "2.10.4"
   val currentVersion = "0.0.4"
   val organizationName = "com.recipegrace.electric"
 
@@ -60,7 +60,7 @@ object CoreSettings {
     name := "ElectricExamples",
     test in assembly := {},
     libraryDependencies ++= Seq(
-
+      "com.cybozu.labs" % "langdetect" % "1.1-20120112",
       Libraries.sparkCore)
   )
 
