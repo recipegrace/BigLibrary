@@ -34,7 +34,7 @@ trait SimpleJob extends SequenceFileJob[TwoArgument] with ArgumentsToMap{
     TwoArgument(mapArgs("input"), mapArgs("output"))
   }
 
-  def execute(input: String, output: String)(ec: ElectricContext)
+  def execute(input: String, output: String)(implicit ec: ElectricContext)
 
 
 }
