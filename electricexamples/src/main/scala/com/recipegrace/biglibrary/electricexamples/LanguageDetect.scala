@@ -10,7 +10,7 @@ import org.apache.spark.SparkContext._
 object LanguageDetect extends TwoInputJob {
 
 
-  override def execute(one: String,two:String, output: String)(ec: ElectricContext): Unit = {
+  override def execute(one: String,two:String, output: String)(implicit ec: ElectricContext): Unit = {
     implicit val sc =ec
    DetectorFactory.loadProfile(two)
    val detector = DetectorFactory.create()
