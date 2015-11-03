@@ -17,7 +17,7 @@ class SparkJobArgumentTest extends SimpleJobTest{
 
     val list = Array("--input", "bob", "--output", "22")
     val exampleInput= new SimpleJob {
-      override def execute(input: String, output: String)(ec: ElectricContext): Unit = ???
+      override def execute(input: String, output: String)(implicit ec: ElectricContext): Unit = ???
     }parse(list)
     exampleInput.input should be("bob")
     exampleInput.output should be("22")

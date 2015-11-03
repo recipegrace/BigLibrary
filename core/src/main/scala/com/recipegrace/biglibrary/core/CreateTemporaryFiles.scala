@@ -1,8 +1,9 @@
 package com.recipegrace.biglibrary.core
 
-import java.io.{File, PrintWriter}
+import java.io._
 import java.nio.charset.{Charset, StandardCharsets}
 import java.nio.file.{Files, Paths}
+import java.util.zip.{ZipEntry, ZipInputStream}
 
 import com.typesafe.scalalogging.slf4j.Logger
 import org.slf4j.LoggerFactory
@@ -71,6 +72,58 @@ trait CreateTemporaryFiles {
 
   def createTempPath(): String = {
     createOutPutFile(false)
+  }
+
+
+  def unZipFile(zipFile:String) = {
+    val buffer = new Array[Byte](1024)
+    val output = createTempPath()
+
+    try {
+
+      //output directory
+      val folder = new File(output)
+      if (!folder.exists()) {
+        folder.mkdir();
+      }
+
+      //zip file content
+      val zis: ZipInputStream = new ZipInputStream(new FileInputStream(zipFile))
+      //get the zipped file list entry
+      var ze: ZipEntry = zis.getNextEntry();
+
+      while (ze != null) {
+
+        val fileName = ze.getName();
+        val newFile = new File(output + File.separator + fileName);
+
+        logger.info("file unzip : " + newFile.getAbsoluteFile());
+
+        //create folders
+        new File(newFile.getParent()).mkdirs();
+
+        val fos = new FileOutputStream(newFile);
+
+        var len: Int = zis.read(buffer);
+
+        while (len > 0) {
+
+          fos.write(buffer, 0, len)
+          len = zis.read(buffer)
+        }
+
+        fos.close()
+        ze = zis.getNextEntry()
+      }
+
+      zis.closeEntry()
+      zis.close()
+
+    } catch {
+      case e => logger.error("exception caught: " + e.getMessage)
+    }
+
+    output
   }
 
 
