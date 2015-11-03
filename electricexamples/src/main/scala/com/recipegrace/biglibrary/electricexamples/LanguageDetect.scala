@@ -10,28 +10,17 @@ import org.apache.spark.SparkFiles
 /**
  * Created by Ferosh Jacob on 10/30/15.
  */
-object LanguageDetect extends TwoInputJob with CreateTemporaryFiles {
+object LanguageDetect extends TwoInputJob with CreateTemporaryFiles with Parser {
 
 
   override def execute(one: String,two:String, output: String)(implicit ec: ElectricContext): Unit = {
 
     ec.sparkContext.addFile(two)
-   // val profileDirectory =
 
 
 
 
-     val content = ec.sparkContext.textFile(one)
-
-                 .filter(f=> f.split("\\t",-1).size==4)
-                  .map(f=> {
-                    val parts =f.split("\\t", -1)
-                    (parts(1),parts(2))
-                  })
-
-
-                  .filter(f=> f._1.trim.length>0 && f._2.forall(_.isDigit))
-                  .map(f=> (f._1,f._2.toLong))
+     val content = inputParse(one)
                    .map(f=>{
                      val lang=
                     try {
