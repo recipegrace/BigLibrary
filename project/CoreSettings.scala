@@ -43,7 +43,9 @@ object CoreSettings {
    parallelExecution in Test:=false,
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "2.2.5",
-"com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2"),      
+"com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
+  "info.debatty" % "java-string-similarity" % "0.13"
+    ),
 //"com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"),
     resolvers ++= Resolvers.allResolvers)
 

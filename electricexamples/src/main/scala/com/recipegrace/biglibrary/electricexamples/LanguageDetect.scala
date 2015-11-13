@@ -15,6 +15,9 @@ object LanguageDetect extends TwoInputJob with CreateTemporaryFiles with Parser 
 
   override def execute(one: String,two:String, output: String)(implicit ec: ElectricContext): Unit = {
 
+
+
+    val latinLangs = List("en","nl", "af", "it", "da", "fr", "ro", "no", "so", "sv", "de", "tl", "es", "fi", "id", "et", "pt", "sq", "lt", "lv", "sl", "sk", "sw", "tr", "cs", "hr", "vi", "hu")
     ec.sparkContext.addFile(two)
 
 
@@ -37,10 +40,11 @@ object LanguageDetect extends TwoInputJob with CreateTemporaryFiles with Parser 
                         case e:Throwable => {
                           "ND"}
                       }
-                     (lang,f._2)
+                     (lang,f._1, f._2)
                    })
-       .reduceByKey(_ + _)
-       .map(f => f._1 + "\t" + f._2)
+      // .reduceByKey(_ + _)
+       .filter(f=> ! latinLangs.contains(f._1))
+       .map(f => f._1 + "\t" + f._2 + "\t"+ f._3)
 
     writeFile(content, output)
   }

@@ -1,16 +1,15 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.ElectricContext
+import com.recipegrace.biglibrary.electric.{SequenceFileAccess, ElectricContext}
 
 /**
  * Created by Ferosh Jacob on 11/3/15.
  */
-trait Parser {
+trait Parser extends SequenceFileAccess {
 
   def inputParse(input:String)(implicit ec:ElectricContext) = {
 
-    ec.sparkContext.textFile(input)
-
+    readFile(input)
       .filter(f=> f.split("\\t",-1).size==4)
       .map(f=> {
         val parts =f.split("\\t", -1)

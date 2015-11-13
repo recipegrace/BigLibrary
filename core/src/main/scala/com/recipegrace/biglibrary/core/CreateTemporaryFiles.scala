@@ -120,7 +120,7 @@ trait CreateTemporaryFiles {
       zis.close()
 
     } catch {
-      case e => logger.error("exception caught: " + e.getMessage)
+      case e:Throwable => logger.error("exception caught: " + e.getMessage)
     }
 
     output
