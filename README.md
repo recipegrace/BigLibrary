@@ -1,6 +1,8 @@
 
 # BigLibrary
 
+This is SCALA 2.10, check the master branch for the latest
+
 <h3>WORA (Write Once Run Anywhere) framework</h3>
 The Biglibrary has been designed as a wrapper for bigdata programs (currently implemented for SPARK). 
 The library enables programmers 1) to customize execution for local and cluster modes, 2) functions for boiler plate code, and 3) guarantees deployable code.
