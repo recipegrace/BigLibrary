@@ -5,8 +5,8 @@ import sbtassembly.AssemblyKeys._
 object CoreSettings {
 
 
-  val sparkVersion = "1.2.1"
-  val currentScalaVersion = "2.10.4"
+  val sparkVersion = "1.5.1"
+  val currentScalaVersion = "2.11.5"
   val currentVersion = "0.0.5"
   val organizationName = "com.recipegrace.electric"
 
@@ -44,6 +44,7 @@ object CoreSettings {
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "2.2.5",
 "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
+      "org.apache.commons" % "commons-lang3" % "3.4",
   "info.debatty" % "java-string-similarity" % "0.13"
     ),
 //"com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"),
