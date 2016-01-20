@@ -5,9 +5,9 @@ import sbtassembly.AssemblyKeys._
 object CoreSettings {
 
 
-  val sparkVersion = "1.5.1"
-  val currentScalaVersion = "2.11.5"
-  val currentVersion = "0.0.5"
+  val sparkVersion = "1.5.2"
+  val currentScalaVersion = "2.10.4"
+  val currentVersion = "0.0.6"
   val organizationName = "com.recipegrace.electric"
 
   // sbt-assembly settings for building a fat jar
@@ -47,7 +47,8 @@ object CoreSettings {
       "org.apache.commons" % "commons-lang3" % "3.4",
   "info.debatty" % "java-string-similarity" % "0.13"
     ),
-//"com.typesafe.scala-logging" %% "scala-logging" % "3.1.0"),
+    publishTo := Some(Resolvers.recipegrace),
+    credentials +=Credentials(Path.userHome / ".sbt" / ".credentials"),
     resolvers ++= Resolvers.allResolvers)
 
   val electricSettings = Seq(
