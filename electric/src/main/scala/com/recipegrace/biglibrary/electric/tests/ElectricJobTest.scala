@@ -2,7 +2,7 @@ package com.recipegrace.biglibrary.electric.tests
 
 import com.recipegrace.biglibrary.core.BaseTest
 import com.recipegrace.biglibrary.electric.Launcher
-import com.recipegrace.biglibrary.electric.jobs._
+import com.recipegrace.biglibrary.electric.jobs.Arguments.{OneArgument,TwoArgument,ThreeArgument}
 
 /**
   * Created by fjacob on 6/1/15.

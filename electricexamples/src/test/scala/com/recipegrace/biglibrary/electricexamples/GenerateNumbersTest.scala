@@ -1,6 +1,6 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.jobs._
+import com.recipegrace.biglibrary.electric.jobs.Arguments.{OneArgument,TwoArgument}
 import com.recipegrace.biglibrary.electric.tests.OutputOnlyJobTest
 
 /**
@@ -18,7 +18,7 @@ class GenerateNumbersTest extends OutputOnlyJobTest {
     val lines = readFilesInDirectory(output, "part")
     lines should contain("1")
   }
-  test("generate number") {
+  test("word count") {
 
     val input = createFile {
       """

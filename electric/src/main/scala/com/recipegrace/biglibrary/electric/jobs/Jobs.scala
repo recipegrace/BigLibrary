@@ -1,5 +1,7 @@
 package com.recipegrace.biglibrary.electric.jobs
 
+import com.recipegrace.biglibrary.electric.jobs.Arguments.{TwoArgument, OneArgument, ThreeArgument}
+
 import com.recipegrace.biglibrary.electric.{ElectricContext, ElectricJob, SequenceFileAccess}
 
 /**
@@ -15,11 +17,12 @@ trait ArgumentsToMap {
     args.grouped(2).map(f => (f(0).split("--")(1), f(1))).toMap
   }
 
-  def validateArgs(map: Map[String, String], mainText: String, args: String*) = {
+  def validateArgs(inArgs:Array[String],map: Map[String, String], mainText: String, args: String*) = {
 
-    require(args.length == 2 * map.keys.size, mainText)
+    val resultText =mainText+ ", but " + map
+    require(inArgs.length == 2*map.keys.size, resultText)
     args.foreach(f => {
-      require(map.contains(f), mainText)
+      require(map.contains(f),resultText )
     })
   }
 }
@@ -36,7 +39,7 @@ trait SimpleJob extends SequenceFileJob[TwoArgument] with ArgumentsToMap {
     val mainText = "Should have --input val --output val"
 
     val mapArgs = convertArgsToMap(args)
-    validateArgs(mapArgs, "input", "output")
+    validateArgs(args,mapArgs,mainText, "input", "output")
 
     TwoArgument(mapArgs("input"), mapArgs("output"))
   }
@@ -52,14 +55,14 @@ trait OutputOnlyJob extends SequenceFileJob[OneArgument] with ArgumentsToMap {
     execute(args.output)
   }
 
-  override def parse(args: Array[String]): TwoArgument = {
+  override def parse(args: Array[String]): OneArgument = {
 
     val mainText = "Should have --output val"
 
     val mapArgs = convertArgsToMap(args)
-    validateArgs(mapArgs, "output")
+    validateArgs(args,mapArgs,mainText, "output")
 
-    TwoArgument(mapArgs("input"), mapArgs("output"))
+    OneArgument(mapArgs("output"))
   }
 
   def execute(output: String)(implicit ec: ElectricContext)
@@ -77,7 +80,7 @@ trait TwoInputJob extends SequenceFileJob[ThreeArgument] with ArgumentsToMap {
     val mainText = "Should have --input val --output val"
 
     val mapArgs = convertArgsToMap(args)
-    validateArgs(mapArgs, "input", "output")
+    validateArgs(args,mapArgs, mainText,"input", "output")
 
     ThreeArgument(mapArgs("one"), mapArgs("two"), mapArgs("output"))
 

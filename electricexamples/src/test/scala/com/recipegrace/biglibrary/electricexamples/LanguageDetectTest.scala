@@ -2,7 +2,7 @@ package com.recipegrace.biglibrary.electricexamples
 
 import java.nio.charset.Charset
 
-import com.recipegrace.biglibrary.electric.jobs.ThreeArgument
+import com.recipegrace.biglibrary.electric.jobs.Arguments.ThreeArgument
 import com.recipegrace.biglibrary.electric.tests.TwoInputJobTest
 
 /**
