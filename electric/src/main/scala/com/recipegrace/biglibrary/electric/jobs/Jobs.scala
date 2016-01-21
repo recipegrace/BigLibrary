@@ -77,10 +77,10 @@ trait TwoInputJob extends SequenceFileJob[ThreeArgument] with ArgumentsToMap {
   }
 
   override def parse(args: Array[String]): ThreeArgument = {
-    val mainText = "Should have --input val --output val"
+    val mainText = "Should have --one val --two val --output val"
 
     val mapArgs = convertArgsToMap(args)
-    validateArgs(args,mapArgs, mainText,"input", "output")
+    validateArgs(args,mapArgs, mainText,"one","two", "output")
 
     ThreeArgument(mapArgs("one"), mapArgs("two"), mapArgs("output"))
 
