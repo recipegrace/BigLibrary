@@ -13,6 +13,13 @@ trait ArgumentsToMap {
   def convertArgsToMap(args:Array[String]) = {
       args.grouped(2).map(f=> (f(0).split("--")(1), f(1))).toMap
   }
+  def validateArgs(map:Map[String,String],mainText:String ,args:String*) = {
+
+    require(args.length==2*map.keys.size, mainText)
+    args.foreach(f=> {
+      require(map.contains(f),mainText)
+    })
+  }
 }
 
 trait SimpleJob extends SequenceFileJob[TwoArgument] with ArgumentsToMap{
@@ -24,12 +31,10 @@ trait SimpleJob extends SequenceFileJob[TwoArgument] with ArgumentsToMap{
   }
 
   override def parse(args:Array[String]):TwoArgument = {
-    require(args.length==4, "Should have --input val --output val")
+    val mainText="Should have --input val --output val"
 
     val mapArgs=convertArgsToMap(args)
-
-    require(mapArgs.contains("input"),"Should have --input val --output val")
-    require(mapArgs.contains("output"),"Should have --input val --output val")
+     validateArgs(mapArgs, "input", "output")
 
     TwoArgument(mapArgs("input"), mapArgs("output"))
   }
@@ -45,13 +50,14 @@ trait OutputOnlyJob extends SequenceFileJob[OneArgument] with ArgumentsToMap{
     execute(args.output)
   }
 
-  override def parse(args:Array[String]):OneArgument = {
-    require(args.length==2)
+  override def parse(args:Array[String]):TwoArgument = {
+
+    val mainText="Should have --output val"
+
     val mapArgs=convertArgsToMap(args)
+    validateArgs(mapArgs, "output")
 
-    require(mapArgs.contains("output"),"Should have --output val")
-
-    OneArgument(mapArgs("output"))
+    TwoArgument(mapArgs("input"), mapArgs("output"))
   }
   def execute(output: String)(implicit ec: ElectricContext)
 
@@ -64,15 +70,14 @@ trait TwoInputJob extends SequenceFileJob[ThreeArgument] with ArgumentsToMap {
     execute(args.one, args.two, args.output)
   }
   override def parse(args:Array[String]):ThreeArgument = {
-    require(args.length==6, "Should have --one val --two val --output val")
+    val mainText="Should have --input val --output val"
 
     val mapArgs=convertArgsToMap(args)
-
-    require(mapArgs.contains("one"),"Should have --one val --two val --output val")
-    require(mapArgs.contains("two"),"Should have --one val --two val --output val")
-    require(mapArgs.contains("output"),"Should have --one val --two val --output val")
+    validateArgs(mapArgs, "input", "output")
 
     ThreeArgument(mapArgs("one"), mapArgs("two"), mapArgs("output"))
+
+
   }
   def execute(one: String, two: String, output: String)(implicit ec: ElectricContext)
 
