@@ -10,6 +10,7 @@ import com.recipegrace.biglibrary.electric.jobs.Arguments.{OneArgument,TwoArgume
 trait ElectricJobTest[T] extends BaseTest with Launcher[T] {
 
 
+
 }
 
 trait SimpleJobTest extends ElectricJobTest[TwoArgument] {}

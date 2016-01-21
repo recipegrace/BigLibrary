@@ -9,19 +9,18 @@ import org.apache.spark.SparkFiles
 /**
   * Created by Ferosh Jacob on 10/30/15.
   */
-object LanguageDetect extends TwoInputJob with CreateTemporaryFiles with Parser {
+object LanguageDetect extends TwoInputJob with CreateTemporaryFiles  {
 
 
   override def execute(one: String, two: String, output: String)(implicit ec: ElectricContext): Unit = {
 
 
-    val latinLangs = List("en", "nl", "af", "it", "da", "fr", "ro", "no", "so", "sv", "de", "tl", "es", "fi", "id", "et", "pt", "sq", "lt", "lv", "sl", "sk", "sw", "tr", "cs", "hr", "vi", "hu")
     ec.sparkContext.addFile(two)
 
 
 
 
-    val content = inputParse(one)
+    val content = readFile(one)
       .map(f => {
         val lang =
           try {
@@ -31,7 +30,7 @@ object LanguageDetect extends TwoInputJob with CreateTemporaryFiles with Parser 
             }
             val detector = DetectorFactory.create()
 
-            detector.append(f._1)
+            detector.append(f)
             detector.detect()
           }
           catch {
@@ -39,11 +38,9 @@ object LanguageDetect extends TwoInputJob with CreateTemporaryFiles with Parser 
               "ND"
             }
           }
-        (lang, f._1, f._2)
+        (lang, f)
       })
-      // .reduceByKey(_ + _)
-      .filter(f => !latinLangs.contains(f._1))
-      .map(f => f._1 + "\t" + f._2 + "\t" + f._3)
+      .map(f => f._1 + "\t" + f._2 )
 
     writeFile(content, output)
   }

@@ -10,6 +10,7 @@ trait Launcher[T] extends CreateTemporaryFiles {
 
   def launch(sparkJob: ElectricJob[T], args: T) = {
     sparkJob.runLocal(args)
+
   }
 
 

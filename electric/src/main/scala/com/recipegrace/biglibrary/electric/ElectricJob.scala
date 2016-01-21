@@ -58,8 +58,10 @@ trait ElectricJob[T] extends SparkContextCreator {
 
   def runLocal(args: T) = {
 
+
     run(args, true)
   }
+
 
   def parse(args: Array[String]): T
 

@@ -16,7 +16,10 @@ trait SparkContextCreator {
     val jars = if (isLocal) List() else List(SparkContext.jarOfObject(this).get)
 
     val sc: SparkContext = {
-      val conf = new SparkConf().setAppName(jobName).setJars(jars)
+      val conf = new SparkConf()
+        .setAppName(jobName)
+        .setJars(jars)
+        .set("spark.driver.allowMultipleContexts", "true")
       if (isLocal)
         conf.setMaster("local")
       new SparkContext(conf)
