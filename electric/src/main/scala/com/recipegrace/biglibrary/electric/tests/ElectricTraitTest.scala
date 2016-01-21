@@ -14,7 +14,7 @@ import org.apache.spark.SparkContext
 abstract class ElectricTraitTest extends BaseTest with SparkContextCreator {
 
 
-  def loadContext={
+  def loadContext = {
     val sc: SparkContext = createSparkContext(true, System.currentTimeMillis() + "")
     ElectricContext(true, sc)
   }

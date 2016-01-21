@@ -4,9 +4,9 @@ import com.recipegrace.biglibrary.electric.jobs._
 import com.recipegrace.biglibrary.electric.tests.OutputOnlyJobTest
 
 /**
- * Created by fjacob on 9/25/15.
- */
-class GenerateNumbersTest extends OutputOnlyJobTest  {
+  * Created by fjacob on 9/25/15.
+  */
+class GenerateNumbersTest extends OutputOnlyJobTest {
 
   test("generate number") {
 
@@ -30,7 +30,7 @@ class GenerateNumbersTest extends OutputOnlyJobTest  {
 
     val output = createTempPath()
 
-    WordCount.runLocal(TwoArgument(input,output))
+    WordCount.runLocal(TwoArgument(input, output))
 
     val lines = readFilesInDirectory(output, "part")
     lines should contain("hello\t1")

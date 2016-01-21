@@ -2,20 +2,17 @@ package com.recipegrace.biglibrary.electric
 
 import com.recipegrace.biglibrary.electric.spark.SparkContextCreator
 import com.typesafe.scalalogging.slf4j.Logger
-import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.SparkContext
 import org.slf4j.LoggerFactory
 
 /**
- * Created by ferosh on 9/25/15.
- */
+  * Created by ferosh on 9/25/15.
+  */
 
 case class ElectricContext(isLocal: Boolean, sparkContext: SparkContext)
 
 trait ElectricJob[T] extends SparkContextCreator {
 
-
-
-  def jobName: String = this.getClass.getName
 
   def toIterator(t: Product): Iterator[Any] = t.productIterator.flatMap {
     case p: Product => toIterator(p)
@@ -24,27 +21,24 @@ trait ElectricJob[T] extends SparkContextCreator {
 
   def execute(t: T)(implicit sc: ElectricContext)
 
-
   def main(args: Array[String]) = {
 
     run(args, false)
   }
 
-  def toArray(args: Map[String, Any]): Array[String] = {
-    args.toList.flatMap(f => List("--" + f._1, f._2.toString)).toArray
-  }
-
   def runLocal(args: Map[String, Any]) = {
-
 
 
     run(toArray(args), true)
 
   }
 
-  def runLocal(args: T) = {
+  def toArray(args: Map[String, Any]): Array[String] = {
+    args.toList.flatMap(f => List("--" + f._1, f._2.toString)).toArray
+  }
 
-    run(args, true)
+  def run(args: Array[String], isLocal: Boolean): Unit = {
+    run(parse(args), isLocal)
   }
 
   def run(args: T, isLocal: Boolean): Unit = {
@@ -60,10 +54,13 @@ trait ElectricJob[T] extends SparkContextCreator {
     logger.info("Elapsed time: " + (t1 - t0) + "ms")
   }
 
-  def parse(args:Array[String]) :T
+  def jobName: String = this.getClass.getName
 
-  def run(args: Array[String], isLocal: Boolean): Unit = {
-        run(parse(args), isLocal)
+  def runLocal(args: T) = {
+
+    run(args, true)
   }
+
+  def parse(args: Array[String]): T
 
 }

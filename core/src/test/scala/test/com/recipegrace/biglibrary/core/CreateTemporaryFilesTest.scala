@@ -1,12 +1,12 @@
 package test.com.recipegrace.biglibrary.core
 
-import com.recipegrace.biglibrary.core.{StringCompare, BaseTest, CreateTemporaryFiles}
+import com.recipegrace.biglibrary.core.{BaseTest, CreateTemporaryFiles, StringCompare}
 
 import scala.io.Source
 
 /**
- * Created by ferosh on 9/25/15.
- */
+  * Created by ferosh on 9/25/15.
+  */
 class CreateTemporaryFilesTest extends BaseTest with CreateTemporaryFiles with StringCompare {
 
 
@@ -15,7 +15,7 @@ class CreateTemporaryFilesTest extends BaseTest with CreateTemporaryFiles with S
 
     val text = "hola"
 
-    val path =createFile(text)
+    val path = createFile(text)
     val lines = Source.fromFile(path).getLines().toList
     lines should contain(text)
 
@@ -23,12 +23,12 @@ class CreateTemporaryFilesTest extends BaseTest with CreateTemporaryFiles with S
 
 
   test("string oneway compare") {
-    val value =onewayCompare("This is a hello world", "Hello worlds")
+    val value = onewayCompare("This is a hello world", "Hello worlds")
     println(s"**********$value")
   }
 
   test("string compare") {
-    val value =compare("something to think about hello", "hello worlds")
+    val value = compare("something to think about hello", "hello worlds")
     println(value)
   }
 }

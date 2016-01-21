@@ -6,28 +6,23 @@ import com.recipegrace.biglibrary.electric.tests.SimpleJobTest
 
 
 /**
- * Created by fjacob on 9/25/15.
- */
+  * Created by fjacob on 9/25/15.
+  */
 
-class SparkJobArgumentTest extends SimpleJobTest{
+class SparkJobArgumentTest extends SimpleJobTest {
 
 
   test("two argument test") {
 
 
     val list = Array("--input", "bob", "--output", "22")
-    val exampleInput= new SimpleJob {
+    val exampleInput = new SimpleJob {
       override def execute(input: String, output: String)(implicit ec: ElectricContext): Unit = ???
-    }parse(list)
+    } parse (list)
     exampleInput.input should be("bob")
     exampleInput.output should be("22")
 
   }
-
-
-
-
-
 
 
 }

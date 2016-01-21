@@ -5,15 +5,9 @@ import sbtassembly.AssemblyKeys._
 object CoreSettings {
 
 
-  val sparkVersion = "1.5.2"
-  val currentScalaVersion = "2.10.4"
-  val currentVersion = "0.0.6"
-  val organizationName = "com.recipegrace.electric"
-
   // sbt-assembly settings for building a fat jar
   lazy val sparkAssemblySettings = Seq(
 
-    // Slightly cleaner jar name
     assemblyJarName in assembly := {
       name.value + "-" + version.value + ".jar"
     },
@@ -35,20 +29,24 @@ object CoreSettings {
     }
 
   )
+  val sparkVersion = "1.5.2"
+  val currentScalaVersion = "2.10.4"
+  val currentVersion = "0.0.6"
+  val organizationName = "com.recipegrace.electric"
   val coreSettings = Seq(
     version := currentVersion,
     scalaVersion := currentScalaVersion,
     organization := organizationName,
     test in assembly := {},
-   parallelExecution in Test:=false,
+    parallelExecution in Test := false,
     libraryDependencies ++= Seq(
       "org.scalatest" %% "scalatest" % "2.2.5",
-"com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
+      "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
       "org.apache.commons" % "commons-lang3" % "3.4",
-  "info.debatty" % "java-string-similarity" % "0.13"
+      "info.debatty" % "java-string-similarity" % "0.13"
     ),
     publishTo := Some(Resolvers.recipegrace),
-    credentials +=Credentials(Path.userHome / ".sbt" / ".credentials"),
+    credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
     resolvers ++= Resolvers.allResolvers)
 
   val electricSettings = Seq(
@@ -73,8 +71,6 @@ object CoreSettings {
     val sparkCore = "org.apache.spark" %% "spark-core" % sparkVersion % "provided"
     val sparkMllib = "org.apache.spark" %% "spark-mllib" % sparkVersion % "provided"
     val sparkSql = "org.apache.spark" %% "spark-sql" % sparkVersion % "provided"
-
-    // Add additional libraries from mvnrepository.com (SBT syntax) here...
   }
 
 }

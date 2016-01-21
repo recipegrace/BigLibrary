@@ -22,7 +22,7 @@ class ParserTest extends ElectricTraitTest with Parser with CreateTemporaryFiles
       """.stripMargin
     }
     implicit val ec = loadContext
-    readFile(input).collect() should have size(8)
+    readFile(input).collect() should have size (8)
   }
 
 }

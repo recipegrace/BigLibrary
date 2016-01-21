@@ -1,8 +1,8 @@
 package com.recipegrace.biglibrary.core
 
 /**
- * Created by fjacob on 09/25/15.
- */
+  * Created by fjacob on 09/25/15.
+  */
 
 abstract class TableDefinition[T] {
 

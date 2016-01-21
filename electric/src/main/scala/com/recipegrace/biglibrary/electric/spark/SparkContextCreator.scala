@@ -7,16 +7,12 @@ import org.apache.spark.{SparkConf, SparkContext}
   */
 trait SparkContextCreator {
 
-  def createLocalSparkContext(jobName:String) = {
+  def createLocalSparkContext(jobName: String) = {
 
-    createSparkContext(true,jobName)
-  }
-  def createClusterSparkContext(jobName:String) = {
-
-    createSparkContext(false,jobName)
+    createSparkContext(true, jobName)
   }
 
-  def createSparkContext(isLocal:Boolean, jobName:String) = {
+  def createSparkContext(isLocal: Boolean, jobName: String) = {
     val jars = if (isLocal) List() else List(SparkContext.jarOfObject(this).get)
 
     val sc: SparkContext = {
@@ -26,5 +22,10 @@ trait SparkContextCreator {
       new SparkContext(conf)
     }
     sc
+  }
+
+  def createClusterSparkContext(jobName: String) = {
+
+    createSparkContext(false, jobName)
   }
 }

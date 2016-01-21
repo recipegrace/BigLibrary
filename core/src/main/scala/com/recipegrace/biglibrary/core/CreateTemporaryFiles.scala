@@ -12,12 +12,12 @@ import scala.collection.JavaConversions._
 import scala.util.Random
 
 /**
- * Created by fjacob on 09/25/15.
- */
+  * Created by fjacob on 09/25/15.
+  */
 trait CreateTemporaryFiles {
 
   val logger = Logger(LoggerFactory.getLogger("CreateFile"))
-
+  val random = new Random(System.currentTimeMillis())
 
   def readFilesInDirectory(directory: String, prefix: String = "", charset: Charset = StandardCharsets.US_ASCII): List[String] = {
 
@@ -45,37 +45,7 @@ trait CreateTemporaryFiles {
 
   }
 
-  val random = new Random(System.currentTimeMillis())
-
-  def createOutPutFile(createFile: Boolean = true): String = {
-
-    val temporaryDirectory = ".tests"
-    val directory = new File(temporaryDirectory)
-
-    if (!directory.exists()) new File(temporaryDirectory).mkdir()
-
-    val outFile = if (createFile) {
-      val tempFile = Files.createTempFile(Paths.get(temporaryDirectory), "out", getFileName)
-      tempFile.toAbsolutePath.toString;
-    } else {
-      val tempFile = new File(temporaryDirectory, "out" + getFileName)
-      tempFile.getAbsoluteFile.toPath.toString
-    }
-    logger.info(s"OutFile:$outFile")
-
-    outFile
-  }
-
-  def getFileName: String = {
-    System.currentTimeMillis() + "" + random.nextFloat()
-  }
-
-  def createTempPath(): String = {
-    createOutPutFile(false)
-  }
-
-
-  def unZipFile(zipFile:String) = {
+  def unZipFile(zipFile: String) = {
     val buffer = new Array[Byte](1024)
     val output = createTempPath()
 
@@ -120,10 +90,37 @@ trait CreateTemporaryFiles {
       zis.close()
 
     } catch {
-      case e:Throwable => logger.error("exception caught: " + e.getMessage)
+      case e: Throwable => logger.error("exception caught: " + e.getMessage)
     }
 
     output
+  }
+
+  def createTempPath(): String = {
+    createOutPutFile(false)
+  }
+
+  def createOutPutFile(createFile: Boolean = true): String = {
+
+    val temporaryDirectory = ".tests"
+    val directory = new File(temporaryDirectory)
+
+    if (!directory.exists()) new File(temporaryDirectory).mkdir()
+
+    val outFile = if (createFile) {
+      val tempFile = Files.createTempFile(Paths.get(temporaryDirectory), "out", getFileName)
+      tempFile.toAbsolutePath.toString;
+    } else {
+      val tempFile = new File(temporaryDirectory, "out" + getFileName)
+      tempFile.getAbsoluteFile.toPath.toString
+    }
+    logger.info(s"OutFile:$outFile")
+
+    outFile
+  }
+
+  def getFileName: String = {
+    System.currentTimeMillis() + "" + random.nextFloat()
   }
 
 

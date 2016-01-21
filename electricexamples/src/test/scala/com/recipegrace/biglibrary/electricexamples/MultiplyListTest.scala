@@ -3,8 +3,8 @@ package com.recipegrace.biglibrary.electricexamples
 import com.recipegrace.biglibrary.electric.tests.ElectricJobTest
 
 /**
- * Created by fjacob on 9/25/15.
- */
+  * Created by fjacob on 9/25/15.
+  */
 class MultiplyListTest extends ElectricJobTest[InputArgument] {
 
   test("multiply list") {

@@ -4,8 +4,8 @@ import com.recipegrace.biglibrary.electric.jobs.ThreeArgument
 import com.recipegrace.biglibrary.electric.tests.TwoInputJobTest
 
 /**
- * Created by fjacob on 9/25/15.
- */
+  * Created by fjacob on 9/25/15.
+  */
 class AppendListTest extends TwoInputJobTest {
 
   test("append list test") {

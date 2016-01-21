@@ -5,8 +5,8 @@ import com.recipegrace.biglibrary.electric.Launcher
 import com.recipegrace.biglibrary.electric.jobs._
 
 /**
- * Created by fjacob on 6/1/15.
- */
+  * Created by fjacob on 6/1/15.
+  */
 trait ElectricJobTest[T] extends BaseTest with Launcher[T] {
 
 

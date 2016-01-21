@@ -1,11 +1,11 @@
 package test.com.recipegrace.biglibrary.core
 
-import com.recipegrace.biglibrary.core.{TrueFalseNeutral, BaseTest}
+import com.recipegrace.biglibrary.core.{BaseTest, TrueFalseNeutral}
 
 /**
   * Created by Ferosh Jacob on 1/20/16.
   */
-class TrueFalseNeutralTest extends BaseTest{
+class TrueFalseNeutralTest extends BaseTest {
 
 
   test("check for neutral") {

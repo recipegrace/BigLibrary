@@ -4,8 +4,8 @@ import com.recipegrace.biglibrary.electric.jobs.TwoArgument
 import com.recipegrace.biglibrary.electric.tests.SimpleJobTest
 
 /**
- * Created by fjacob on 9/25/15.
- */
+  * Created by fjacob on 9/25/15.
+  */
 class WordCountTest extends SimpleJobTest {
 
   test("wordcount test with spark") {

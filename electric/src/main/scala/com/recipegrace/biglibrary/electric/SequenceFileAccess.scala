@@ -3,14 +3,13 @@ package com.recipegrace.biglibrary.electric
 import com.recipegrace.biglibrary.core.TableDefinition
 import org.apache.hadoop.io.{LongWritable, Text}
 import org.apache.spark.SparkContext
-import org.apache.spark.SparkContext._
 import org.apache.spark.rdd.RDD
 
 import scala.reflect.ClassTag
 
 /**
- * Created by ferosh on 9/25/15.
- */
+  * Created by ferosh on 9/25/15.
+  */
 trait SequenceFileAccess {
 
   def sequentialFile[P: ClassTag](hiveTable: TableDefinition[P], isTextFile: Boolean = false)(implicit ec: ElectricContext): RDD[P] = {
@@ -51,7 +50,7 @@ trait SequenceFileAccess {
     if (sc.isLocal || !isSequence) {
       sc.sparkContext.textFile(file)
     } else {
-      sc.sparkContext.sequenceFile[Text,Text](file)
+      sc.sparkContext.sequenceFile[Text, Text](file)
         .map(f => f._2.toString)
 
     }
