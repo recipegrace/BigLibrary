@@ -11,7 +11,7 @@ case class InputArgument(input: String, factor: Int, output: String)
 
 object MultiplyList extends SequenceFileJob[InputArgument] with ArgumentsToMap{
 
-  override def job(t: InputArgument)(implicit sc: ElectricContext): Unit = {
+  override def execute(t: InputArgument)(implicit sc: ElectricContext): Unit = {
     val input =
       readFile(t.input)
         .map(f => f.toInt * t.factor)

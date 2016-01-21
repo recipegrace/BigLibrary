@@ -1,5 +1,6 @@
 package com.recipegrace.biglibrary.electric
 
+import com.recipegrace.biglibrary.electric.spark.SparkContextCreator
 import com.typesafe.scalalogging.slf4j.Logger
 import org.apache.spark.{SparkConf, SparkContext}
 import org.slf4j.LoggerFactory
@@ -10,7 +11,7 @@ import org.slf4j.LoggerFactory
 
 case class ElectricContext(isLocal: Boolean, sparkContext: SparkContext)
 
-trait ElectricJob[T] {
+trait ElectricJob[T] extends SparkContextCreator {
 
 
 
@@ -21,7 +22,7 @@ trait ElectricJob[T] {
     case x => Iterator(x)
   }
 
-  def job(t: T)(implicit sc: ElectricContext)
+  def execute(t: T)(implicit sc: ElectricContext)
 
 
   def main(args: Array[String]) = {
@@ -50,16 +51,10 @@ trait ElectricJob[T] {
     val logger = Logger(LoggerFactory.getLogger("ElectricJob"))
     val t0 = System.currentTimeMillis()
     logger.info("starting job:" + jobName)
-    val jars = if (isLocal) List() else List(SparkContext.jarOfObject(this).get)
 
-    val sc: SparkContext = {
-      val conf = new SparkConf().setAppName(jobName).setJars(jars)
-      if (isLocal)
-        conf.setMaster("local")
-      new SparkContext(conf)
-    }
+    val sc = createSparkContext(isLocal, jobName)
     implicit val context = ElectricContext(isLocal, sc)
-    job(args)(context)
+    execute(args)(context)
     sc.stop()
     val t1 = System.currentTimeMillis()
     logger.info("Elapsed time: " + (t1 - t0) + "ms")

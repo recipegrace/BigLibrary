@@ -1,7 +1,7 @@
 
 # BigLibrary
 
-This is SCALA 2.10, because the spark this version uses is written in SCALA 2.10.X
+This is SCALA 2.10, because the spark version  (Spark 1.5.2) relies on the same SCALA version.
 
 <h3>WORA (Write Once Run Anywhere) framework</h3>
 The Biglibrary has been designed as a wrapper for bigdata programs (currently implemented for SPARK). 

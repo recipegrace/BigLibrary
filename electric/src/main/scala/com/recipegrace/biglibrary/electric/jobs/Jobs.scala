@@ -17,7 +17,7 @@ trait ArgumentsToMap {
 
 trait SimpleJob extends SequenceFileJob[TwoArgument] with ArgumentsToMap{
 
-  override def job(args: TwoArgument)(implicit ec: ElectricContext) = {
+  override def execute(args: TwoArgument)(implicit ec: ElectricContext) = {
     execute(args.input, args.output)(ec)
 
 
@@ -41,7 +41,7 @@ trait SimpleJob extends SequenceFileJob[TwoArgument] with ArgumentsToMap{
 
 trait OutputOnlyJob extends SequenceFileJob[OneArgument] with ArgumentsToMap{
 
-  override def job(args: OneArgument)(implicit ec: ElectricContext) = {
+  override def execute(args: OneArgument)(implicit ec: ElectricContext) = {
     execute(args.output)
   }
 
@@ -60,7 +60,7 @@ trait OutputOnlyJob extends SequenceFileJob[OneArgument] with ArgumentsToMap{
 
 trait TwoInputJob extends SequenceFileJob[ThreeArgument] with ArgumentsToMap {
 
-  override def job(args: ThreeArgument)(implicit ec: ElectricContext) = {
+  override def execute(args: ThreeArgument)(implicit ec: ElectricContext) = {
     execute(args.one, args.two, args.output)
   }
   override def parse(args:Array[String]):ThreeArgument = {
