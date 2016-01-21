@@ -31,7 +31,7 @@ object CoreSettings {
   )
   val sparkVersion = "1.5.2"
   val currentScalaVersion = "2.10.4"
-  val currentVersion = "0.0.6"
+  val currentVersion = "0.0.8"
   val organizationName = "com.recipegrace.electric"
   val coreSettings = Seq(
     version := currentVersion,
