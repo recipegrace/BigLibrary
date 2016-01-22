@@ -2,13 +2,13 @@ package com.recipegrace.biglibrary.electric.jobs
 
 import com.recipegrace.biglibrary.electric.jobs.Arguments.{TwoArgument, OneArgument, ThreeArgument}
 
-import com.recipegrace.biglibrary.electric.{ElectricContext, ElectricJob, SequenceFileAccess}
+import com.recipegrace.biglibrary.electric.{ElectricContext, ElectricJob, FileAccess}
 
 /**
   * Created by Ferosh Jacob on 10/16/15.
   */
 
-trait SequenceFileJob[T] extends ElectricJob[T] with SequenceFileAccess {
+trait SequenceFileJob[T] extends ElectricJob[T] with FileAccess {
 
 }
 

@@ -10,12 +10,12 @@ import scala.reflect.ClassTag
 /**
   * Created by ferosh on 9/25/15.
   */
-trait SequenceFileAccess {
+trait FileAccess {
 
-  def sequentialFile[P: ClassTag](hiveTable: TableDefinition[P], isTextFile: Boolean = false)(implicit ec: ElectricContext): RDD[P] = {
+  def sequenceFile[P: ClassTag](hiveTable: TableDefinition[P], isTextFile: Boolean = false)(implicit ec: ElectricContext): RDD[P] = {
 
 
-    val content = getSequentialFileText(ec.isLocal, isTextFile, hiveTable, ec.sparkContext)
+    val content = getSequenceFileText(ec.isLocal, isTextFile, hiveTable, ec.sparkContext)
     if (ec.isLocal)
       content
         .map(hiveTable.columns.local)
@@ -23,7 +23,7 @@ trait SequenceFileAccess {
 
   }
 
-  private def getSequentialFileText[P](isLocal: Boolean, isRemoteTextFile: Boolean, table: TableDefinition[P], sc: SparkContext): RDD[String] = {
+  private def getSequenceFileText[P](isLocal: Boolean, isRemoteTextFile: Boolean, table: TableDefinition[P], sc: SparkContext): RDD[String] = {
 
     if (isLocal)
       sc
@@ -43,6 +43,9 @@ trait SequenceFileAccess {
 
   def readFile(file: String)(implicit sc: ElectricContext): RDD[String] = {
     readFile(file, true)
+  }
+  def readTextFile(file: String)(implicit sc: ElectricContext): RDD[String] = {
+    readFile(file, false)
   }
 
   def readFile(file: String, isSequence: Boolean)(implicit sc: ElectricContext): RDD[String] = {

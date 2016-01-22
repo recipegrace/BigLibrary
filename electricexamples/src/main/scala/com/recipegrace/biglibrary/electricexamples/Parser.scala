@@ -1,11 +1,11 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.{ElectricContext, SequenceFileAccess}
+import com.recipegrace.biglibrary.electric.{ElectricContext, FileAccess}
 
 /**
   * Created by Ferosh Jacob on 11/3/15.
   */
-trait Parser extends SequenceFileAccess {
+trait Parser extends FileAccess {
 
   def inputParse(input: String)(implicit ec: ElectricContext) = {
 
