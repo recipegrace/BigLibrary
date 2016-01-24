@@ -32,7 +32,7 @@ object CoreSettings {
   val sparkVersion = "1.5.2"
 //  val currentScalaVersion = "2.10.4"
   val currentScalaVersion = "2.11.7"
-  val currentVersion = "0.0.10"
+  val currentVersion = "0.0.11"
   val organizationName = "com.recipegrace.electric"
   val coreSettings = Seq(
     version := currentVersion,
@@ -44,6 +44,7 @@ object CoreSettings {
       "org.scalatest" %% "scalatest" % "2.2.5",
       "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
       "org.apache.commons" % "commons-lang3" % "3.4",
+      "commons-io" % "commons-io" % "2.4",
       "info.debatty" % "java-string-similarity" % "0.13"
     ),
     publishTo := Some(Resolvers.recipegrace),

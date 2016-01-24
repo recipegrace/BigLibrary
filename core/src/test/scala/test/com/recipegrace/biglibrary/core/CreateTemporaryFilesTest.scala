@@ -2,14 +2,14 @@ package test.com.recipegrace.biglibrary.core
 
 import java.io.File
 
-import com.recipegrace.biglibrary.core.{BaseTest, CreateTemporaryFiles, StringCompare}
+import com.recipegrace.biglibrary.core.{ZipArchive, BaseTest, CreateTemporaryFiles, StringCompare}
 
 import scala.io.Source
 
 /**
   * Created by ferosh on 9/25/15.
   */
-class CreateTemporaryFilesTest extends BaseTest with CreateTemporaryFiles with StringCompare {
+class CreateTemporaryFilesTest extends BaseTest with CreateTemporaryFiles with StringCompare with ZipArchive {
 
 
   test("test temporary files") {
@@ -22,12 +22,15 @@ class CreateTemporaryFilesTest extends BaseTest with CreateTemporaryFiles with S
     lines should contain(text)
 
   }
+  test("zip file test 1") {
+    val zipFile=this.getClass.getResourceAsStream("/hello.zip")
 
-  test("zip file test") {
-    val hello = unZipFile( this.getClass.getResourceAsStream("/hello.zip"))
-    println(hello)
-    val file = new File(hello).listFiles().head
+    val path =unZip(zipFile)
+    val file = new File(path).listFiles().head
     Source.fromFile(file).getLines().toList.head should equal("hello")
+  }
+
+  test("zip file test 2") {
   }
 
   test("string oneway compare") {
