@@ -1,5 +1,7 @@
 package test.com.recipegrace.biglibrary.core
 
+import java.io.File
+
 import com.recipegrace.biglibrary.core.{BaseTest, CreateTemporaryFiles, StringCompare}
 
 import scala.io.Source
@@ -21,6 +23,12 @@ class CreateTemporaryFilesTest extends BaseTest with CreateTemporaryFiles with S
 
   }
 
+  test("zip file test") {
+    val hello = unZipFile( this.getClass.getResourceAsStream("/hello.zip"))
+    println(hello)
+    val file = new File(hello).listFiles().head
+    Source.fromFile(file).getLines().toList.head should equal("hello")
+  }
 
   test("string oneway compare") {
     val value = onewayCompare("This is a hello world", "Hello worlds")

@@ -45,21 +45,53 @@ trait CreateTemporaryFiles {
 
   }
 
-  def unZipFile(zipFile: String) = {
+  def createTempPath(): String = {
+    createOutPutFile(false)
+  }
+
+  def createOutPutFile(createFile: Boolean = true): String = {
+
+    val temporaryDirectory = ".tests"
+    val directory = new File(temporaryDirectory)
+
+    if (!directory.exists()) new File(temporaryDirectory).mkdir()
+
+    val outFile = if (createFile) {
+      val tempFile = Files.createTempFile(Paths.get(temporaryDirectory), "out", getFileName)
+      tempFile.toAbsolutePath.toString;
+    } else {
+      val tempFile = new File(temporaryDirectory, "out" + getFileName)
+      tempFile.getAbsoluteFile.toPath.toString
+    }
+    logger.info(s"OutFile:$outFile")
+
+    outFile
+  }
+
+  def getFileName: String = {
+    System.currentTimeMillis() + "" + random.nextFloat()
+  }
+
+  def unZipFile(zipFile: String):String = {
+
+
+    val zis: ZipInputStream = new ZipInputStream(new FileInputStream(zipFile))
+
+    unZipFile(zis)
+  }
+
+  def unZipFile(inputStream: InputStream ):String = {
+
+
+    val zis = new ZipInputStream(inputStream)
+
     val buffer = new Array[Byte](1024)
     val output = createTempPath()
 
-    try {
 
-      //output directory
-      val folder = new File(output)
-      if (!folder.exists()) {
-        folder.mkdir();
-      }
-
-      //zip file content
-      val zis: ZipInputStream = new ZipInputStream(new FileInputStream(zipFile))
-      //get the zipped file list entry
+    val folder = new File(output)
+    if (!folder.exists())
+      folder.mkdir()
       var ze: ZipEntry = zis.getNextEntry();
 
       while (ze != null) {
@@ -89,38 +121,10 @@ trait CreateTemporaryFiles {
       zis.closeEntry()
       zis.close()
 
-    } catch {
-      case e: Throwable => logger.error("exception caught: " + e.getMessage)
-    }
 
-    output
-  }
 
-  def createTempPath(): String = {
-    createOutPutFile(false)
-  }
+      output
 
-  def createOutPutFile(createFile: Boolean = true): String = {
-
-    val temporaryDirectory = ".tests"
-    val directory = new File(temporaryDirectory)
-
-    if (!directory.exists()) new File(temporaryDirectory).mkdir()
-
-    val outFile = if (createFile) {
-      val tempFile = Files.createTempFile(Paths.get(temporaryDirectory), "out", getFileName)
-      tempFile.toAbsolutePath.toString;
-    } else {
-      val tempFile = new File(temporaryDirectory, "out" + getFileName)
-      tempFile.getAbsoluteFile.toPath.toString
-    }
-    logger.info(s"OutFile:$outFile")
-
-    outFile
-  }
-
-  def getFileName: String = {
-    System.currentTimeMillis() + "" + random.nextFloat()
   }
 
 
