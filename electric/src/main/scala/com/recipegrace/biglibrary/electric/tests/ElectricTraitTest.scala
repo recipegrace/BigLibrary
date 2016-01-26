@@ -1,6 +1,6 @@
 package com.recipegrace.biglibrary.electric.tests
 
-import com.recipegrace.biglibrary.core.BaseTest
+import com.recipegrace.biglibrary.core.{CreateTemporaryFiles, BaseTest}
 import com.recipegrace.biglibrary.electric.ElectricContext
 import com.recipegrace.biglibrary.electric.spark.SparkContextCreator
 import org.apache.spark.SparkContext
@@ -11,7 +11,7 @@ import org.apache.spark.SparkContext
   */
 
 
-abstract class ElectricTraitTest extends BaseTest with SparkContextCreator {
+abstract class ElectricTraitTest extends BaseTest with SparkContextCreator  with CreateTemporaryFiles{
 
 
   def loadContext = {
