@@ -1,7 +1,8 @@
 
 # BigLibrary
 
-This is SCALA 2.10, because the spark version  (Spark 1.5.2) relies on the same SCALA version.
+[![Build Status](https://travis-ci.org/recipegrace/BigLibrary.svg?branch=master)](https://travis-ci.org/recipegrace/BigLibrary)
+
 
 <h3>WORA (Write Once Run Anywhere) framework</h3>
 The Biglibrary has been designed as a wrapper for bigdata programs (currently implemented for SPARK). 
