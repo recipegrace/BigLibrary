@@ -5,12 +5,27 @@ import com.recipegrace.biglibrary.core.CreateTemporaryFiles
 import com.recipegrace.biglibrary.core.ZipArchive
 import com.recipegrace.biglibrary.electric.ElectricContext
 import com.recipegrace.biglibrary.electric.jobs.TwoInputJob
+
 import org.apache.spark.SparkFiles
 
 /**
   * Created by Ferosh Jacob on 10/30/15.
   */
+object LanguageDetectWrapper extends ZipArchive {
+  val profileFolder = unZip(SparkFiles.get("profiles.zip"))
+  DetectorFactory.loadProfile(profileFolder)
+  println("loaded profiles...")
+
+  def detectLanguage(text:String) = {
+    val detector = DetectorFactory.create()
+
+    detector.append(text)
+    detector.detect()
+  }
+}
+
 object LanguageDetect extends TwoInputJob with CreateTemporaryFiles with ZipArchive  {
+
 
 
   override def execute(one: String, two: String, output: String)(implicit ec: ElectricContext): Unit = {
@@ -23,23 +38,8 @@ object LanguageDetect extends TwoInputJob with CreateTemporaryFiles with ZipArch
 
     val content = readFile(one)
       .map(f => {
-        val lang =
-          try {
-            if (DetectorFactory.getLangList.size() < 1) {
-              val profileFolder = unZip(SparkFiles.get("profiles.zip"))
-              DetectorFactory.loadProfile(profileFolder)
-            }
-            val detector = DetectorFactory.create()
 
-            detector.append(f)
-            detector.detect()
-          }
-          catch {
-            case e: Throwable => {
-              "ND"
-            }
-          }
-        (lang, f)
+        (LanguageDetectWrapper.detectLanguage(f), f)
       })
       .map(f => f._1 + "\t" + f._2 )
 

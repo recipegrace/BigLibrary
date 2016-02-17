@@ -49,7 +49,7 @@ trait CreateTemporaryFiles {
     createOutPutFile(false)
   }
 
-  def createOutPutFile(createFile: Boolean = true): String = {
+  def createOutPutFile(createFile: Boolean = true,isDirectory:Boolean=false): String = {
 
     val temporaryDirectory = ".tests"
     val directory = new File(temporaryDirectory)
@@ -57,8 +57,10 @@ trait CreateTemporaryFiles {
     if (!directory.exists()) new File(temporaryDirectory).mkdir()
 
     val outFile = if (createFile) {
-      val tempFile = Files.createTempFile(Paths.get(temporaryDirectory), "out", getFileName)
-      tempFile.toAbsolutePath.toString;
+      val tempFile =  if(! isDirectory) Files.createTempFile(Paths.get(temporaryDirectory), "out", getFileName)
+        else Files.createTempDirectory(getFileName)
+      tempFile.toAbsolutePath.toString
+
     } else {
       val tempFile = new File(temporaryDirectory, "out" + getFileName)
       tempFile.getAbsoluteFile.toPath.toString

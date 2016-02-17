@@ -16,8 +16,9 @@ trait ZipArchive extends CreateTemporaryFiles {
   def unZip(source: String):String = {
     val zipFile = new ZipFile(source)
 
-    val outputPath = createTempPath()
+    val outputPath = createOutPutFile(true,true)
     unzipAllFile(zipFile.entries.toList, getZipEntryInputStream(zipFile), new File(outputPath))
+    logger.info("Unzipped to folder:" +outputPath )
     outputPath
   }
   def unZip(source: InputStream):String = {
@@ -39,8 +40,8 @@ trait ZipArchive extends CreateTemporaryFiles {
     val outPath =createTempPath()
     val outFile =new File(outPath)
     outFile.mkdir()
-    unzipAllFile1(entries.sortBy(f=> f.getName.size), outFile )
-    def unzipAllFile1(entryList: List[ZipEntry],  targetFolder: File): Boolean = {
+    unzipAllFile(entries.sortBy(f=> f.getName.size), outFile )
+    def unzipAllFile(entryList: List[ZipEntry],  targetFolder: File): Boolean = {
 
       entryList match {
         case entry :: entries => {
@@ -51,7 +52,7 @@ trait ZipArchive extends CreateTemporaryFiles {
           else
             saveFile1( targetFolder.getAbsolutePath, entry.getName, entry)
 
-          unzipAllFile1(entries,  targetFolder)
+          unzipAllFile(entries,  targetFolder)
         }
         case _ =>
           true

@@ -7,11 +7,11 @@ import com.recipegrace.biglibrary.electric.jobs.{ArgumentsToMap, SequenceFileJob
   * Created by Ferosh Jacob on 10/16/15.
   */
 
-case class InputArgument(input: String, factor: Int, output: String)
+case class MultiplyArgument(input: String, factor: Int, output: String)
 
-object MultiplyList extends SequenceFileJob[InputArgument] with ArgumentsToMap {
+object MultiplyList extends SequenceFileJob[MultiplyArgument] with ArgumentsToMap {
 
-  override def execute(t: InputArgument)(implicit sc: ElectricContext): Unit = {
+  override def execute(t: MultiplyArgument)(implicit sc: ElectricContext): Unit = {
     val input =
       readFile(t.input)
         .map(f => f.toInt * t.factor)
@@ -20,15 +20,17 @@ object MultiplyList extends SequenceFileJob[InputArgument] with ArgumentsToMap {
 
   }
 
-  override def parse(args: Array[String]): InputArgument = {
-    require(args.length == 6, "Should have --input val --factor val --output val")
+  override def parse(args: Array[String]): MultiplyArgument = {
 
+
+    val input="input"
+    val factor="factor"
+    val output ="output"
+
+    val mainText = s"Should have --$input val --$factor val --$output"
     val mapArgs = convertArgsToMap(args)
+    validateArgs(args, mapArgs, mainText, input, factor, output)
 
-    require(mapArgs.contains("input"), "Should have --input val --factor val --output val")
-    require(mapArgs.contains("factor"), "Should have --input val --factor val --output val")
-    require(mapArgs.contains("output"), "Should have --input val --factor val --output val")
-
-    InputArgument(mapArgs("input"), mapArgs("factor").toInt, mapArgs("output"))
+    MultiplyArgument(mapArgs(input),  mapArgs(output).toInt, mapArgs(factor))
   }
 }

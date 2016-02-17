@@ -5,7 +5,7 @@ import com.recipegrace.biglibrary.electric.tests.ElectricJobTest
 /**
   * Created by fjacob on 9/25/15.
   */
-class MultiplyListTest extends ElectricJobTest[InputArgument] {
+class MultiplyListTest extends ElectricJobTest[MultiplyArgument] {
 
   test("multiply list") {
 
@@ -18,7 +18,7 @@ class MultiplyListTest extends ElectricJobTest[InputArgument] {
 
 
     val output = createTempPath()
-    launch(MultiplyList, InputArgument(one, 4, output))
+    launch(MultiplyList, MultiplyArgument(one, 4, output))
 
     val lines = readFilesInDirectory(output, "part")
     lines should contain("4")
