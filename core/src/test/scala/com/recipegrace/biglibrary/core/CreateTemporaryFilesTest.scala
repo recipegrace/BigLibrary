@@ -1,4 +1,4 @@
-package test.com.recipegrace.biglibrary.core
+package com.recipegrace.biglibrary.core
 
 import java.io.File
 

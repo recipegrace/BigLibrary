@@ -1,4 +1,4 @@
-package test.com.recipegrace.biglibrary.core
+package com.recipegrace.biglibrary.core
 
 import com.recipegrace.biglibrary.core.{BaseTest, TrueFalseNeutral}
 
