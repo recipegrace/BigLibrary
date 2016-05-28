@@ -32,11 +32,11 @@ object CoreSettings {
   val sparkVersion = "1.5.2"
   val currentScalaVersion = "2.10.4"
 //  val currentScalaVersion = "2.11.7"
-  val currentVersion = "0.0.12"
+  val currentVersion = "0.0.15-SNAPSHOT"
   val organizationName = "com.recipegrace.electric"
   val coreSettings = Seq(
     version := currentVersion,
-    scalaVersion := currentScalaVersion,
+    crossScalaVersions := Seq("2.10.6","2.11.5"),
     organization := organizationName,
     test in assembly := {},
     parallelExecution in Test := false,
@@ -47,7 +47,7 @@ object CoreSettings {
       "commons-io" % "commons-io" % "2.4",
       "info.debatty" % "java-string-similarity" % "0.13"
     ),
-    publishTo := Some(Resolvers.recipegrace),
+    publishTo := Some(Resolvers.recipegraceSnapshots),
     credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
     resolvers ++= Resolvers.allResolvers)
 
