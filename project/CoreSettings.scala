@@ -31,8 +31,7 @@ object CoreSettings {
   )
   val sparkVersion = "1.5.2"
   val currentScalaVersion = "2.10.4"
-//  val currentScalaVersion = "2.11.7"
-  val currentVersion = "0.0.15-SNAPSHOT"
+  val currentVersion = "0.0.1"
   val organizationName = "com.recipegrace"
   val coreSettings = Seq(
     version := currentVersion,
@@ -47,8 +46,8 @@ object CoreSettings {
       "commons-io" % "commons-io" % "2.4",
       "info.debatty" % "java-string-similarity" % "0.13"
     ),
-    publishTo := Some(Resolvers.recipegraceSnapshots),
-    credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
+    publishTo := Some(Resolvers.ossSnapshots),
+    credentials += Credentials(Path.userHome / ".sbt" / ".osscredentials"),
     resolvers ++= Resolvers.allResolvers)
 
   val electricSettings = Seq(
