@@ -4,6 +4,7 @@ object BuildElectric extends Build {
 
   import CoreSettings._
 
+  
   lazy val core = (project in file("core")).
     settings(coreSettings: _*)
 
@@ -15,6 +16,9 @@ object BuildElectric extends Build {
   lazy val electricexamples = (project in file("electricexamples")).
     settings(coreSettings ++ electricJobSettings ++ sparkAssemblySettings: _*) dependsOn (electric)
 
+
+  lazy val biglibrary = (project in file(".")).
+    settings(coreSettings: _*) aggregate (core,electric)
 
 }
 

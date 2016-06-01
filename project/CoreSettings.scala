@@ -4,6 +4,10 @@ import sbtassembly.AssemblyKeys._
 
 object CoreSettings {
 
+  val sparkVersion = "1.6.1"
+  val currentScalaVersion = "2.10.6"
+  val currentVersion = "0.0.2"
+  val organizationName = "com.recipegrace"
 
   // sbt-assembly settings for building a fat jar
   lazy val sparkAssemblySettings = Seq(
@@ -29,14 +33,9 @@ object CoreSettings {
     }
 
   )
-  val sparkVersion = "1.5.2"
-  val currentScalaVersion = "2.10.4"
-//  val currentScalaVersion = "2.11.7"
-  val currentVersion = "0.0.12"
-  val organizationName = "com.recipegrace.electric"
   val coreSettings = Seq(
     version := currentVersion,
-    scalaVersion := currentScalaVersion,
+    crossScalaVersions := Seq("2.10.6","2.11.5"),
     organization := organizationName,
     test in assembly := {},
     parallelExecution in Test := false,
@@ -47,8 +46,33 @@ object CoreSettings {
       "commons-io" % "commons-io" % "2.4",
       "info.debatty" % "java-string-similarity" % "0.13"
     ),
-    publishTo := Some(Resolvers.recipegrace),
-    credentials += Credentials(Path.userHome / ".sbt" / ".credentials"),
+    publishTo := {
+      val nexus = "https://oss.sonatype.org/"
+      if (isSnapshot.value) Some(Resolvers.ossSnapshots)
+      else Some(Resolvers.ossStaging)
+     },
+    credentials += Credentials(Path.userHome / ".sbt" / ".osscredentials"),
+    pomIncludeRepository := { _ => false },
+    pomExtra := (
+  <url>http://recipegrace.com/recipegrace</url>
+  <licenses>
+    <license>
+      <name>BSD-style</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>git@github.com:recipegrace/BigLibrary.git</url>
+    <connection>scm:git:git@github.com:recipegrace/BigLibrary.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>feroshjacob</id>
+      <name>Ferosh Jacob</name>
+      <url>http://www.feroshjacob.com</url>
+    </developer>
+  </developers>),
     resolvers ++= Resolvers.allResolvers)
 
   val electricSettings = Seq(

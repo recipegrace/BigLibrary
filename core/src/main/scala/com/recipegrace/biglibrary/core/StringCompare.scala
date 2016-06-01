@@ -21,8 +21,6 @@ trait StringCompare {
 
     val list = ngrams.flatten.map(f => {
       if (f.equals(unChanged.toLowerCase)) 1.0 else 0.0
-      // println(s" --- $current")
-      //current
     })
     if (list.isEmpty) 0.0 else list.max
 
@@ -33,20 +31,8 @@ trait StringCompare {
     // println(s"$f1 and $f2")
     val metrics =
       List(
-        //  new NormalizedLevenshtein().distance(f1,f2),
-
-        //new JaroWinkler() .distance(f1,f2),
-
         new MetricLCS().distance(f1, f2),
-
         new NGram().distance(f1, f2)
-        /*
-             ,new Cosine() .distance(f1,f2),
-
-             new Jaccard() .distance(f1,f2),
-
-             new SorensenDice() .distance(f1,f2)
-            */
       )
 
     // println(metrics.mkString(","))

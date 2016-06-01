@@ -1,8 +1,7 @@
-package test.com.recipegrace.biglibrary.core
+package com.recipegrace.biglibrary.core
 
 import java.io.File
 
-import com.recipegrace.biglibrary.core.{ZipArchive, BaseTest, CreateTemporaryFiles, StringCompare}
 
 import scala.io.Source
 
