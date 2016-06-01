@@ -6,7 +6,7 @@ object CoreSettings {
 
   val sparkVersion = "1.6.1"
   val currentScalaVersion = "2.10.6"
-  val currentVersion = "0.0.2-SNAPSHOT"
+  val currentVersion = "0.0.2"
   val organizationName = "com.recipegrace"
 
   // sbt-assembly settings for building a fat jar
