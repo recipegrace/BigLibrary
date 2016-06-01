@@ -48,5 +48,13 @@ class WordCountTest extends SimpleJobTest {
   }
 ```
 
+# Developers 
+
+To publish a new version
+
+1. Create a OSS account
+2. Checkout project and make changes
+3. ./sbt + publish-signed
+
 
 

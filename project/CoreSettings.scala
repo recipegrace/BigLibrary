@@ -4,6 +4,10 @@ import sbtassembly.AssemblyKeys._
 
 object CoreSettings {
 
+  val sparkVersion = "1.6.1"
+  val currentScalaVersion = "2.10.6"
+  val currentVersion = "0.0.2-SNAPSHOT"
+  val organizationName = "com.recipegrace"
 
   // sbt-assembly settings for building a fat jar
   lazy val sparkAssemblySettings = Seq(
@@ -29,10 +33,6 @@ object CoreSettings {
     }
 
   )
-  val sparkVersion = "1.6.1"
-  val currentScalaVersion = "2.10.6"
-  val currentVersion = "0.0.1"
-  val organizationName = "com.recipegrace"
   val coreSettings = Seq(
     version := currentVersion,
     crossScalaVersions := Seq("2.10.6","2.11.5"),
@@ -48,9 +48,9 @@ object CoreSettings {
     ),
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
-      if (isSnapshot.value) Some(Resolvers.ossSnaphots)
+      if (isSnapshot.value) Some(Resolvers.ossSnapshots)
       else Some(Resolvers.ossStaging)
-     }
+     },
     credentials += Credentials(Path.userHome / ".sbt" / ".osscredentials"),
     pomIncludeRepository := { _ => false },
     pomExtra := (
