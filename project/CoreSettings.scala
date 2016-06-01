@@ -29,8 +29,8 @@ object CoreSettings {
     }
 
   )
-  val sparkVersion = "1.5.2"
-  val currentScalaVersion = "2.10.4"
+  val sparkVersion = "1.6.1"
+  val currentScalaVersion = "2.10.6"
   val currentVersion = "0.0.1"
   val organizationName = "com.recipegrace"
   val coreSettings = Seq(
@@ -46,8 +46,33 @@ object CoreSettings {
       "commons-io" % "commons-io" % "2.4",
       "info.debatty" % "java-string-similarity" % "0.13"
     ),
-    publishTo := Some(Resolvers.ossSnapshots),
+    publishTo := {
+      val nexus = "https://oss.sonatype.org/"
+      if (isSnapshot.value) Some(Resolvers.ossSnaphots)
+      else Some(Resolvers.ossStaging)
+     }
     credentials += Credentials(Path.userHome / ".sbt" / ".osscredentials"),
+    pomIncludeRepository := { _ => false },
+    pomExtra := (
+  <url>http://recipegrace.com/recipegrace</url>
+  <licenses>
+    <license>
+      <name>BSD-style</name>
+      <url>http://www.opensource.org/licenses/bsd-license.php</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <scm>
+    <url>git@github.com:recipegrace/BigLibrary.git</url>
+    <connection>scm:git:git@github.com:recipegrace/BigLibrary.git</connection>
+  </scm>
+  <developers>
+    <developer>
+      <id>feroshjacob</id>
+      <name>Ferosh Jacob</name>
+      <url>http://www.feroshjacob.com</url>
+    </developer>
+  </developers>),
     resolvers ++= Resolvers.allResolvers)
 
   val electricSettings = Seq(
