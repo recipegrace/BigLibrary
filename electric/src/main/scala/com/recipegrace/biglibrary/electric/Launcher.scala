@@ -1,5 +1,7 @@
 package com.recipegrace.biglibrary.electric
 
+import java.nio.charset.Charset
+
 import com.recipegrace.biglibrary.core.CreateTemporaryFiles
 
 /**
@@ -14,7 +16,7 @@ trait Launcher[T] extends CreateTemporaryFiles {
   }
 
 
-  def readSparkOut(dir: String) = {
-    readFilesInDirectory(dir, "part")
+  def readSparkOut(dir: String,charset: Charset=Charset.forName("ISO-8859-1")) = {
+    readFilesInDirectory(dir, "part",charset)
   }
 }
