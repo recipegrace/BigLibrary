@@ -9,6 +9,10 @@ object CoreSettings {
   val currentVersion = "0.0.3-SNAPSHOT"
   val organizationName = "com.recipegrace"
 
+//  val username = System.getenv().get("SONATYPE_USERNAME")
+
+ // val password = System.getenv().get("SONATYPE_PASSWORD")
+
   // sbt-assembly settings for building a fat jar
   lazy val sparkAssemblySettings = Seq(
 
@@ -52,7 +56,7 @@ object CoreSettings {
       if (isSnapshot.value) Some(Resolvers.ossSnapshots)
       else Some(Resolvers.ossStaging)
      },
-    credentials += Credentials("sonatype.sbt"),
+//    credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password),
     pomIncludeRepository := { _ => false },
     pomExtra := (
   <url>http://recipegrace.com/recipegrace</url>
