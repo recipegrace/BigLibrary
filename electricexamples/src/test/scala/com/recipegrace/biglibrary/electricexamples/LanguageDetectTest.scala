@@ -11,7 +11,7 @@ import jdk.nashorn.internal.ir.annotations.Ignore
 
 class LanguageDetectTest extends ElectricJobTest  {
 
-  ignore("language detect test with spark") {
+  test("language detect test with spark") {
 
 
     val output = createTempPath()
