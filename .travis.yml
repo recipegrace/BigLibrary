@@ -1,1 +1,2 @@
+script: "java -version"
 script: "./sbt test"
