@@ -34,11 +34,11 @@ class CreateTemporaryFilesTest extends BaseTest with CreateTemporaryFiles with S
 
   test("string oneway compare") {
     val value = onewayCompare("This is a hello world", "Hello worlds")
-    println(s"**********$value")
+    logger.info(s"**********$value")
   }
 
   test("string compare") {
     val value = compare("something to think about hello", "hello worlds")
-    println(value)
+    logger.info(value+"")
   }
 }
