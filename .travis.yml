@@ -1,5 +1,10 @@
-language: java
+language: scala
+scala:
+- 2.10.6
+script: sbt clean test 
 jdk:
-  - oraclejdk8
-script:
-  - "./sbt test"
+- oraclejdk8
+notifications:
+  email:
+    recipients:
+    - feroshjacob@gmail.com
