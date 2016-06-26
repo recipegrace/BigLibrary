@@ -1,19 +1,19 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.jobs.Arguments.{OneArgument,TwoArgument}
-import com.recipegrace.biglibrary.electric.tests.OutputOnlyJobTest
+import com.recipegrace.biglibrary.electric.tests.ElectricJobTest
+
 
 /**
   * Created by fjacob on 9/25/15.
   */
-class GenerateNumbersTest extends OutputOnlyJobTest {
+class GenerateNumbersTest extends ElectricJobTest {
 
   test("generate number") {
 
 
     val output = createTempPath()
 
-    launch(GenerateNumbers, OneArgument(output))
+    launch(GenerateNumbers, OutputOnlyArgument(output))
 
     val lines = readFilesInDirectory(output, "part")
     lines should contain("1")
@@ -30,7 +30,7 @@ class GenerateNumbersTest extends OutputOnlyJobTest {
 
     val output = createTempPath()
 
-    WordCount.runLocal(TwoArgument(input, output))
+    launch(WordCount, InputAndOutput(input, output))
 
     val lines = readFilesInDirectory(output, "part")
     lines should contain("hello\t1")

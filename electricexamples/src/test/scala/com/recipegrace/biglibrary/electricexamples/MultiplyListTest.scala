@@ -5,7 +5,7 @@ import com.recipegrace.biglibrary.electric.tests.ElectricJobTest
 /**
   * Created by fjacob on 9/25/15.
   */
-class MultiplyListTest extends ElectricJobTest[MultiplyArgument] {
+class MultiplyListTest extends ElectricJobTest {
 
   test("multiply list") {
 

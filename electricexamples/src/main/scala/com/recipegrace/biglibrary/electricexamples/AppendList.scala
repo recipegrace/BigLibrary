@@ -1,18 +1,18 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.ElectricContext
-import com.recipegrace.biglibrary.electric.jobs.TwoInputJob
+import com.recipegrace.biglibrary.electric.{SequenceFileJob, ElectricContext}
 
 
 /**
   * Created by Ferosh Jacob on 10/16/15.
   */
-object AppendList extends TwoInputJob {
-  override def execute(one: String, two: String, output: String)(implicit ec: ElectricContext): Unit = {
+case class InputsAndOutput(input1:String,input2:String, output:String)
+object AppendList extends SequenceFileJob[InputsAndOutput] {
+  override def execute(arg:InputsAndOutput)(implicit ec: ElectricContext): Unit = {
 
 
-    val first = readFile(one)
-    val second = readFile(two)
-    writeFile(first ++ second, output)
+    val first = readFile(arg.input1)
+    val second = readFile(arg.input2)
+    writeFile(first ++ second, arg.output)
   }
 }

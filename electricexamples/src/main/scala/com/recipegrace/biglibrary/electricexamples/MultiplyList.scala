@@ -1,7 +1,7 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.ElectricContext
-import com.recipegrace.biglibrary.electric.jobs.{ArgumentsToMap, SequenceFileJob}
+import com.recipegrace.biglibrary.electric.jobs.ArgumentsToMap
+import com.recipegrace.biglibrary.electric.{SequenceFileJob, ElectricContext}
 
 /**
   * Created by Ferosh Jacob on 10/16/15.
@@ -18,19 +18,5 @@ object MultiplyList extends SequenceFileJob[MultiplyArgument] with ArgumentsToMa
 
     writeFile(input, t.output)
 
-  }
-
-  override def parse(args: Array[String]): MultiplyArgument = {
-
-
-    val input="input"
-    val factor="factor"
-    val output ="output"
-
-    val mainText = s"Should have --$input val --$factor val --$output"
-    val mapArgs = convertArgsToMap(args)
-    validateArgs(args, mapArgs, mainText, input, factor, output)
-
-    MultiplyArgument(mapArgs(input),  mapArgs(output).toInt, mapArgs(factor))
   }
 }

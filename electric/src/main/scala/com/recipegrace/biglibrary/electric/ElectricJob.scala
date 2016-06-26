@@ -1,44 +1,48 @@
 package com.recipegrace.biglibrary.electric
 
+
+import com.recipegrace.biglibrary.electric.jobs.ArgumentsToMap
 import com.recipegrace.biglibrary.electric.spark.SparkContextCreator
+import com.thoughtworks.paranamer.{AdaptiveParanamer}
 import com.typesafe.scalalogging.slf4j.Logger
 import org.apache.spark.SparkContext
 import org.slf4j.LoggerFactory
 
-/**
-  * Created by ferosh on 9/25/15.
-  */
-
+import scala.reflect.ClassTag
 case class ElectricContext(isLocal: Boolean, sparkContext: SparkContext)
+trait SequenceFileJob[T] extends ElectricJob[T] with FileAccess
+abstract class ElectricJob[T:ClassTag] extends SparkContextCreator with ArgumentsToMap  {
 
-trait ElectricJob[T] extends SparkContextCreator {
 
 
-  def toIterator(t: Product): Iterator[Any] = t.productIterator.flatMap {
-    case p: Product => toIterator(p)
-    case x => Iterator(x)
-  }
 
-  def execute(t: T)(implicit sc: ElectricContext)
+  def execute(t: T)(implicit ec: ElectricContext): Unit
 
   def main(args: Array[String]) = {
-
     run(args, false)
   }
 
-  def runLocal(args: Map[String, Any]) = {
 
 
-    run(toArray(args), true)
-
+  def argumentsToObject(args:Array[String]): T = {
+    import scala.reflect._
+    val clazz = classTag[T].runtimeClass
+    val paranamer = new AdaptiveParanamer()
+    val constructors = clazz.getConstructors()
+    assert(constructors.size == 1, "only one contructor allowed for input argument " + clazz)
+    val constructor = constructors.head
+    val types = constructor.getParameterTypes.map(f => f.getTypeName)
+    val names = paranamer.lookupParameterNames(constructor)
+    val arguments = convertArgsToArgs(args, names.zip(types))
+    val instance = constructor.newInstance(arguments: _*).asInstanceOf[T]
+    instance
   }
 
-  def toArray(args: Map[String, Any]): Array[String] = {
-    args.toList.flatMap(f => List("--" + f._1, f._2.toString)).toArray
-  }
 
   def run(args: Array[String], isLocal: Boolean): Unit = {
-    run(parse(args), isLocal)
+
+    val instance: T = argumentsToObject(args)
+    run(instance, isLocal)
   }
 
   def run(args: T, isLocal: Boolean): Unit = {
@@ -57,12 +61,9 @@ trait ElectricJob[T] extends SparkContextCreator {
   def jobName: String = this.getClass.getName
 
   def runLocal(args: T) = {
-
-
     run(args, true)
   }
 
 
-  def parse(args: Array[String]): T
 
 }

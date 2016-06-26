@@ -1,12 +1,12 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.jobs.Arguments.ThreeArgument
-import com.recipegrace.biglibrary.electric.tests.TwoInputJobTest
+import com.recipegrace.biglibrary.electric.tests.ElectricJobTest
+
 
 /**
   * Created by fjacob on 9/25/15.
   */
-class AppendListTest extends TwoInputJobTest {
+class AppendListTest extends ElectricJobTest {
 
   test("append list test") {
 
@@ -24,7 +24,7 @@ class AppendListTest extends TwoInputJobTest {
     }
 
     val output = createTempPath()
-    launch(AppendList, ThreeArgument(one, two, output))
+    launch(AppendList, InputsAndOutput(one, two, output))
 
     val lines = readFilesInDirectory(output, "part")
     lines should contain("1")
