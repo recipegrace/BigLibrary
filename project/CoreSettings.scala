@@ -52,7 +52,7 @@ object CoreSettings {
       if (isSnapshot.value) Some(Resolvers.ossSnapshots)
       else Some(Resolvers.ossStaging)
      },
-    credentials += Credentials(Path.userHome / ".sbt" / ".osscredentials"),
+    credentials += Credentials("sonatype.sbt"),
     pomIncludeRepository := { _ => false },
     pomExtra := (
   <url>http://recipegrace.com/recipegrace</url>
