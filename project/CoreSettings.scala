@@ -6,7 +6,7 @@ object CoreSettings {
 
   val sparkVersion = "1.6.1"
   val currentScalaVersion = "2.10.6"
-  val currentVersion = "0.0.2"
+  val currentVersion = "0.0.3-SNAPSHOT"
   val organizationName = "com.recipegrace"
 
   // sbt-assembly settings for building a fat jar
@@ -44,6 +44,7 @@ object CoreSettings {
       "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
       "org.apache.commons" % "commons-lang3" % "3.4",
       "commons-io" % "commons-io" % "2.4",
+      "com.thoughtworks.paranamer" % "paranamer-parent" % "2.4.1" pomOnly(),
       "info.debatty" % "java-string-similarity" % "0.13"
     ),
     publishTo := {

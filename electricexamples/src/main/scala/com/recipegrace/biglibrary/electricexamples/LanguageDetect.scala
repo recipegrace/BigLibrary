@@ -1,10 +1,11 @@
 package com.recipegrace.biglibrary.electricexamples
 
+import java.nio.file.Paths
+
 import com.cybozu.labs.langdetect.DetectorFactory
 import com.recipegrace.biglibrary.core.CreateTemporaryFiles
 import com.recipegrace.biglibrary.core.ZipArchive
-import com.recipegrace.biglibrary.electric.ElectricContext
-import com.recipegrace.biglibrary.electric.jobs.TwoInputJob
+import com.recipegrace.biglibrary.electric.{SequenceFileJob, ElectricContext}
 
 import org.apache.spark.SparkFiles
 
@@ -24,25 +25,25 @@ object LanguageDetectWrapper extends ZipArchive {
   }
 }
 
-object LanguageDetect extends TwoInputJob with CreateTemporaryFiles with ZipArchive  {
+object LanguageDetect extends SequenceFileJob[InputsAndOutput] with CreateTemporaryFiles with ZipArchive  {
 
 
 
-  override def execute(one: String, two: String, output: String)(implicit ec: ElectricContext): Unit = {
+  override def execute(args:InputsAndOutput)(implicit ec: ElectricContext): Unit = {
 
 
-    ec.sparkContext.addFile(two)
+    ec.sparkContext.addFile(args.input1)
 
 
 
 
-    val content = readFile(one)
+    val content = readFile(args.input2)
       .map(f => {
 
         (LanguageDetectWrapper.detectLanguage(f), f)
       })
       .map(f => f._1 + "\t" + f._2 )
 
-    writeFile(content, output)
+    writeFile(content, args.output)
   }
 }
