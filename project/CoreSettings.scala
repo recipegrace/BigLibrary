@@ -6,7 +6,7 @@ object CoreSettings {
 
   val sparkVersion = "1.6.1"
   val currentScalaVersion = "2.10.6"
-  val currentVersion = "0.0.3-SNAPSHOT"
+  val currentVersion = "0.0.3"
   val organizationName = "com.recipegrace"
 
   val username = System.getenv().get("SONATYPE_USERNAME")
