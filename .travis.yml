@@ -19,7 +19,7 @@ env:
   - secure: w3qaPrrkadkcCWu8UGSkvHLPQ4MQKyaK9YDNMCxrdSetfAjQek3+N6W9EWLW2nHgoZKWoaxJGDxa9z6bLxd24a5/0r9oePnx88I2nQ4URt0C5M5iwrCwlUs7INBUGBqLU/5JQveaUZZKxb5O5xf4BHqE93V6tPo1cimkSqezf26v37o/VBFvaI2UAEFaB2Kfud/6pwxS3lEC2DcsYgBZNuKtMsaMnc6mxNCfIjLwAVhwJAZ1Ezxbuk1oG6jTROLcfyG2qD7612vdK97/Kpr6ltwGsiiw1gNIc/5X16on8n2IYaaulKsKvm9ahBRqjpW/eRCkyPcksiSG4WGY23uNI1cn3nQ70Gz3+qYJ6lGw1GXIn2X25KmeTaap0n+FxZlrCY+/ayGjt/Y4Mh9CrSA+grE/BQj3V8r6WwSzerVbhkKgeF16Oea3j4kbRVs7q2tLNwSkuhQIb84TPCHojRCty80wGC9nItVIC1ylPM4+EFH3YPmkRFnPbsaxiSmrwRrCI1V+KrW1ats02i1tto+wHFcHljN0TlgPbTgruy0uhBkPrtcfzDDYVM0G2TSiSsgrsNLJbQyuLcUZ5PsTMNfRN3V0iLMRdAwbQ6NcBwIlWS3z9zJLDuWTd92TSu/E8e/BB86+EPOg1NUun6EoSUXhtxrnIUFphr/Ldc5eDnJIs2g=
   matrix:
     - TEST_COMMAND="test"
-    - TEST_COMMAND="'project electricexamples' test"
+    - TEST_COMMAND="electricexamples/test"
 
 script:
   - ./sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M "$TEST_COMMAND"
