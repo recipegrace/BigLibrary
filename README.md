@@ -15,22 +15,22 @@ Biglibrary realize a bigdata program as a pair: 1) Actual job and 2) Test job. T
 
 
 ```scala
-object WordCount extends SimpleJob {
-  override def execute(input: String, output: String)(ec: ElectricContext) = {
-    implicit val context = ec
-    val file = readFile(input)
+case class InputAndOutput(input:String, output:String)
+object WordCount extends SequenceFileJob[InputAndOutput] {
+  override def execute(argument:InputAndOutput)(implicit ec: ElectricContext) = {
+    val file = readFile(argument.input, false)
     val words = file.flatMap(_.toLowerCase.replaceAll("[^a-zA-Z0-9\\s]", "").split("\\s+"))
     val wordCounts = words
       .map(x => (x, 1)).reduceByKey(_ + _)
       .map(f => f._1 + "\t" + f._2)
-    writeFile(wordCounts, output)
+    writeFile(wordCounts, argument.output)
   }
-
+}
 ```  
 WordCountTest 
 
 ```scala
-class WordCountTest extends SimpleJobTest {
+class WordCountTest extends ElectricJobTest {
   test("wordcount test with spark") {
     val input = createFile {
       """
@@ -40,12 +40,12 @@ class WordCountTest extends SimpleJobTest {
       """.stripMargin
     }
     val output = createTempPath()
-    launch(WordCount, TwoArgument(input, output))
-
+    launch(WordCount, InputAndOutput(input, output))
     val lines = readFilesInDirectory(output, "part")
     lines should contain("hello\t1")
     lines should contain("world\t3")
   }
+}
 ```
 
 # Developers 
