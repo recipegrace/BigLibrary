@@ -23,11 +23,10 @@ env:
 
 script:
   - ./sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M "$TEST_COMMAND"
+  - if [ "$TRAVIS_BRANCH" == "master" ]; then ./sbt publish-signed; fi
   - find $HOME/.sbt -name "*.lock" | xargs rm
   - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
 
-after_success:
-  - '[[ $TRAVIS_BRANCH == "master" ]] && { ./sbt publish; };'
 
 notifications:
   email:
