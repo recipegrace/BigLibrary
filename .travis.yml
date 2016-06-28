@@ -8,6 +8,12 @@ scala:
 - 2.10.6
 jdk:
 - oraclejdk8
+
+before_install:
+- openssl aes-256-cbc -pass pass:$PGP_PASSPHRASE -in secring.gpg.enc -out local.secring.gpg -d
+- openssl aes-256-cbc -pass pass:$PGP_PASSPHRASE -in pubring.gpg.enc -out local.pubring.gpg -d
+- openssl aes-256-cbc -pass pass:$PGP_PASSPHRASE -in pgp.sbt.enc -out local.pgp.sbt -d
+
 env:
   global:
   - secure: H3HnKxnSWssUp75fV/aPUUxkrJM8zqq9icoN3gijR9qKg1+fKaYHH3NoSQOO5BavRpEE7QIcw/PmQnDl1z2Y7dyespQZTvzhVHfS6utkaZjyQXE7pxj4FmGZR8lSTq32TXs2Y4u7YD1vQo4elBLMWKYdjJagXWAFStcQ9sM6RA/8LC5BJpeWguvzJgY6RmovMvEgrW2EidtwgAntLdoENXCCck6dw1YMwhNoUiQSKaNhqqW8+IWlH7lLKNeRGnZVOmE45nzY1EtvIy7erYbtmx814+KiGMdcHxA2RXikNBc/k7L/1PvO6ujUnEn+sGHWUmLH5AGQMiezOp9inQUHqIDlTVTamJdXFgnVsIyrtp2aNheZ8UmitEz2xAdGhhRVgI/bUTONs+kL6nuRwKb46alfHVUshOz6DNR30OeBEOcvc5h0i3jr4R0Se9M+hnqCfllu2R2w5v2t8+qOyQg/d6YXP8+VQTz3z35ErlAA5MgKiE/ZCdpWcbakplGDpzEPw8p9MkE8HaFzzy4d1tTkXi5fBfsBYvq22DxKYd+66eB5SL+Wl6bsnXliZ7uDnPZTzOyxH/+UdXIY9LSGVh+eOpN5HQ+F74WVZdhdUw15F8eXJjElcGTUfGOCTezquhAKCKJDAG5v9hNNFU7h07RaGYBxg9tjkll/SfyhdTzvTh8=
