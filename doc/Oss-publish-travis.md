@@ -44,13 +44,24 @@ that files to the *ROOT* folder of the project (add .gitignore entries to ignore
 #### Step 4. Configure the `.travis.yml` to read the encrypted files and decrypt.
 
 1. Add the following section to the `.travis.yml` file.
+
 ```YAML
 before_install:
-- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in secring.gpg.enc -out secring.gpg -d
-- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in pubring.gpg.enc -out pubring.gpg -d
+- openssl aes-256-cbc -pass pass:$PGP_PASSPHRASE -in secring.gpg.enc -out secring.gpg -d
+- openssl aes-256-cbc -pass pass:$PGP_PASSPHRASE -in pubring.gpg.enc -out pubring.gpg -d
 ```
 
 #### Step 5. Configure the `Build.scala/build.sbt` to read the credentials from environment variables available in travis.
 
+1. Add the following lines to the `build.sbt/Build.scala` file.
 
- 
+```SCALA
+import com.typesafe.sbt.SbtPgp.autoImportImpl._
+ credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", System.getenv().get("SONATYPE_USERNAME"), System.getenv().get("SONATYPE_PASSWORD"))
+ pgpPassphrase := Some( System.getenv().get("PGP_PASSPHRASE").toCharArray),
+ pgpSecretRing := file("secring.gpg"),
+ pgpPublicRing := file("pubring.gpg"),
+```
+ My code is in `Build.scala` but I don't find any reason for the code not to work on `build.sbt`. 
+
+
