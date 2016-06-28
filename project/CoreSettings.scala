@@ -40,6 +40,7 @@ object CoreSettings {
     //version := currentVersion,
     crossScalaVersions := Seq("2.10.6","2.11.5"),
     organization := organizationName,
+    pgpPassphrase := Some(Array('a', 'b', 'c')),
     test in assembly := {},
     parallelExecution in Test := false,
     libraryDependencies ++= Seq(
