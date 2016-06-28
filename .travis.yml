@@ -15,12 +15,9 @@ env:
   - secure: NSohemkgg7rU7KbmTtB59POgJeCj+0yCQO07nm0T33NiRuV4dwsa9rmbQOJIiARIAtDUr690OES61R6WwoTji0IZhbrzlckBhxvEAyWgc4QbDwetqPhv4tB28anJjJx6+3bmmu6iZn0zniBkwAkNWoXT6xdpzSe4p6GF5y2KuG+lZd7klk7CIHYNQWyMHWhFjHaAotIPFuR+QwFd5u3F+ZRotaRd99A8d5RtVx3S7/rEFB5tI/BXW17z5w/co3ziWYkLjPxVPJjxIIjjaPMLbfYG0mvfRLHFa0kHclPNmJRhXz9TF1+iaPKVCJS4n3Gx+vczvVOMz9bKLNv7D3k0MGs3qICxAz9FGF+LyPSJdAO8Iy9JrIW1aTzI0uPeXp6hBIb//pDLsTae/Lla83GShfFeNFmFvaBpQTfeN/M2vIomigku2U78ko2czkX4EpYdvvcntgY2ZM9g0cl1Wc41SIgtg8Iz/rchvUB/r8gLygyhD3HNmaMfcsqA9rquLnzwnupZGULecG4icpUKym2lcGSR4/8ICyB4JWzmpIvhi9pEgzGQ8xeP5YotnYj48vZuaygwSqvuBr4YujvGIgvhStGcz4+K7U82tOVzp+/czP3XxvNH1CEHoje61DsemVxewu8+W8ddawx7BTaF/F40gvmjHgoVMEbWB2gwcGgqTqk=
   - secure: VnbX5Nelw6Rzcbegu8Il+8F5HtxFrDAzKmKPpMajvUHObptedvQOlyiYXOLVtWODzXBiZcNFchlSREAbGzrvIr1KbBaUNO0RL1lQpule5Pui517OjRycbmqsVe5OOCfLJC/d3Y1nkYzAu9+DaHQn4aAcOC/b84CNQheI5MHmBsnch3sDXm3as9YjXaBOFOSYCFGncJ0ugr+mGT93I6EmGOWdUzEE5D72Tx7+L/0Atb6pHaTZZrsykLoFpiSrD6beHuaGcsx/ysbCeqg8Bu5Nn5hfS0/hhEP4S/VWuFDNDnL7Y4uEnOceo/VAf4E6wp/Gbn8p1Opwp2Zee338/OB0Y6obXkFprQHbemEn88axNjCHoZbgt74rEs31/J7NbJmeMe9w3a4djHnaMf1/Cg99iyGwNdnmgYnCtbaYsZr6/7K7U3JWcmd9wZ7Vfc1I0SVobcWTzHnNWHWy+lkrGa0HlqTJmHtrLY9uuVQjchtyKy/NNnoXz0lIwBzKX4K9JlzVsoOcFj1eKnbDhVLoy8o8ij0IceOn+2kbVlqm1BZTGoBEmk1EWjoRI9utKY7P/5b8x8s+rdjXfjNfHmFmXaf3ZQZfkZgcCsNaZS/W+JbFrIPDaFzxr4Xrw+ECtekM+2qxaHN5UKu//3NTn4ikl1VymLqqgZSBZski/irUo9B4ikY=
 script:
-- ./sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M
-  test
-- ./sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M
-  electricexamples/test
-- if [ "$TRAVIS_BRANCH" == "master" ]; then ./sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8
-  -J-XX:ReservedCodeCacheSize=256M publish-signed; fi
+#- ./sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M test
+#- ./sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M electricexamples/test
+- if [ "$TRAVIS_BRANCH" == "master" ]; then ./sbt ++$TRAVIS_SCALA_VERSION -Dfile.encoding=UTF8 -J-XX:ReservedCodeCacheSize=256M publish-signed; fi
 - find $HOME/.sbt -name "*.lock" | xargs rm
 - find $HOME/.ivy2 -name "ivydata-*.properties" | xargs rm
 notifications:
