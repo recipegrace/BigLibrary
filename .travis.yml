@@ -12,7 +12,6 @@ jdk:
 before_install:
 - openssl aes-256-cbc -pass pass:$PGP_PASSPHRASE -in secring.gpg.enc -out local.secring.gpg -d
 - openssl aes-256-cbc -pass pass:$PGP_PASSPHRASE -in pubring.gpg.enc -out local.pubring.gpg -d
-- openssl aes-256-cbc -pass pass:$PGP_PASSPHRASE -in pgp.sbt.enc -out local.pgp.sbt -d
 
 env:
   global:
