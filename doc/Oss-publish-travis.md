@@ -15,7 +15,23 @@ Instead of using the <EMAIL_GIVEN_IN_LAST_COMMAND>, you can use the RSA KEY ID, 
 
 
 
-#### Step 2. 
+#### Step 2. Adding the Sonatype credentials and *PASSPHRASE* to `.travis.yml` 
+
+1. Install travis utility to your machine. In OSX, use the command `sudo gem install travis`. 
+2. From the *ROOT* folder of the project (where the `.travis.yml` is located) issue the following commands
+..*`travis encrypt PGP_PASSPHRASE=<PASSPHRASE> --add` 
+..*`travis encrypt SONATYPE_USERNANE=<SONATYPE_USERNAME> --add` 
+..*`travis encrypt SONATYPE_PASSWORD=<SONATYPE_PASSWORD> --add` 
+
+These commands will add entries like below in your `.travis.yml` file.
+
+```YAML
+env:
+  global:
+  - secure: H3HnKxnSWssUp75fV/aPUUxkrJM8zqq9icoN3gijR9qKg1+fKaYHH3NoSQOO5BavRpEE7QIcw/PmQnDl1z2Y7dyespQZTvzhVHfS6utkaZjyQXE7pxj4FmGZR8lSTq32TXs2Y4u7YD1vQo4elBLMWKYdjJagXWAFStcQ9sM6RA/8LC5BJpeWguvzJgY6RmovMvEgrW2EidtwgAntLdoENXCCck6dw1YMwhNoUiQSKaNhqqW8+IWlH7lLKNeRGnZVOmE45nzY1EtvIy7erYbtmx814+KiGMdcHxA2RXikNBc/k7L/1PvO6ujUnEn+sGHWUmLH5AGQMiezOp9inQUHqIDlTVTamJdXFgnVsIyrtp2aNheZ8UmitEz2xAdGhhRVgI/bUTONs+kL6nuRwKb46alfHVUshOz6DNR30OeBEOcvc5h0i3jr4R0Se9M+hnqCfllu2R2w5v2t8+qOyQg/d6YXP8+VQTz3z35ErlAA5MgKiE/ZCdpWcbakplGDpzEPw8p9MkE8HaFzzy4d1tTkXi5fBfsBYvq22DxKYd+66eB5SL+Wl6bsnXliZ7uDnPZTzOyxH/+UdXIY9LSGVh+eOpN5HQ+F74WVZdhdUw15F8eXJjElcGTUfGOCTezquhAKCKJDAG5v9hNNFU7h07RaGYBxg9tjkll/SfyhdTzvTh8=
+  - secure: w3qaPrrkadkcCWu8UGSkvHLPQ4MQKyaK9YDNMCxrdSetfAjQek3+N6W9EWLW2nHgoZKWoaxJGDxa9z6bLxd24a5/0r9oePnx88I2nQ4URt0C5M5iwrCwlUs7INBUGBqLU/5JQveaUZZKxb5O5xf4BHqE93V6tPo1cimkSqezf26v37o/VBFvaI2UAEFaB2Kfud/6pwxS3lEC2DcsYgBZNuKtMsaMnc6mxNCfIjLwAVhwJAZ1Ezxbuk1oG6jTROLcfyG2qD7612vdK97/Kpr6ltwGsiiw1gNIc/5X16on8n2IYaaulKsKvm9ahBRqjpW/eRCkyPcksiSG4WGY23uNI1cn3nQ70Gz3+qYJ6lGw1GXIn2X25KmeTaap0n+FxZlrCY+/ayGjt/Y4Mh9CrSA+grE/BQj3V8r6WwSzerVbhkKgeF16Oea3j4kbRVs7q2tLNwSkuhQIb84TPCHojRCty80wGC9nItVIC1ylPM4+EFH3YPmkRFnPbsaxiSmrwRrCI1V+KrW1ats02i1tto+wHFcHljN0TlgPbTgruy0uhBkPrtcfzDDYVM0G2TSiSsgrsNLJbQyuLcUZ5PsTMNfRN3V0iLMRdAwbQ6NcBwIlWS3z9zJLDuWTd92TSu/E8e/BB86+EPOg1NUun6EoSUXhtxrnIUFphr/Ldc5eDnJIs2g=
+  - secure: NSohemkgg7rU7KbmTtB59POgJeCj+0yCQO07nm0T33NiRuV4dwsa9rmbQOJIiARIAtDUr690OES61R6WwoTji0IZhbrzlckBhxvEAyWgc4QbDwetqPhv4tB28anJjJx6+3bmmu6iZn0zniBkwAkNWoXT6xdpzSe4p6GF5y2KuG+lZd7klk7CIHYNQWyMHWhFjHaAotIPFuR+QwFd5u3F+ZRotaRd99A8d5RtVx3S7/rEFB5tI/BXW17z5w/co3ziWYkLjPxVPJjxIIjjaPMLbfYG0mvfRLHFa0kHclPNmJRhXz9TF1+iaPKVCJS4n3Gx+vczvVOMz9bKLNv7D3k0MGs3qICxAz9FGF+LyPSJdAO8Iy9JrIW1aTzI0uPeXp6hBIb//pDLsTae/Lla83GShfFeNFmFvaBpQTfeN/M2vIomigku2U78ko2czkX4EpYdvvcntgY2ZM9g0cl1Wc41SIgtg8Iz/rchvUB/r8gLygyhD3HNmaMfcsqA9rquLnzwnupZGULecG4icpUKym2lcGSR4/8ICyB4JWzmpIvhi9pEgzGQ8xeP5YotnYj48vZuaygwSqvuBr4YujvGIgvhStGcz4+K7U82tOVzp+/czP3XxvNH1CEHoje61DsemVxewu8+W8ddawx7BTaF/F40gvmjHgoVMEbWB2gwcGgqTqk=
+```
 
  
 
