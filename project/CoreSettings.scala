@@ -1,12 +1,11 @@
 import sbt.Keys._
 import sbt._
 import sbtassembly.AssemblyKeys._
-
 object CoreSettings {
 
   val sparkVersion = "1.6.1"
   val currentScalaVersion = "2.10.6"
-  val currentVersion = "0.0.3"
+  //val currentVersion = "0.0.3"
   val organizationName = "com.recipegrace"
 
   val username = System.getenv().get("SONATYPE_USERNAME")
@@ -38,7 +37,7 @@ object CoreSettings {
 
   )
   val coreSettings = Seq(
-    version := currentVersion,
+    //version := currentVersion,
     crossScalaVersions := Seq("2.10.6","2.11.5"),
     organization := organizationName,
     test in assembly := {},

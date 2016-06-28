@@ -23,5 +23,6 @@ project/project
 .settings/
 .idea/
 
+local.*
 #Project-specific changes
 .tests/
