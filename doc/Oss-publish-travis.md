@@ -64,4 +64,5 @@ import com.typesafe.sbt.SbtPgp.autoImportImpl._
 ```
  My code is in `Build.scala` but I don't find any reason for the code not to work on `build.sbt`. 
 
-
+##### Credits
+1. [Shipping from GitHub to Maven Central and S3, using Travis-CI](https://www.theguardian.com/info/developer-blog/2014/sep/16/shipping-from-github-to-maven-central-and-s3-using-travis-ci)
