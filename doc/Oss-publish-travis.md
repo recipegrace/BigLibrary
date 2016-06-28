@@ -19,9 +19,9 @@ Instead of using the <EMAIL_GIVEN_IN_LAST_COMMAND>, you can use the RSA KEY ID, 
 
 1. Install travis utility to your machine. In OSX, use the command `sudo gem install travis`. 
 2. From the *ROOT* folder of the project (where the `.travis.yml` is located) issue the following commands
-..*`travis encrypt PGP_PASSPHRASE=<PASSPHRASE> --add` 
-..*`travis encrypt SONATYPE_USERNANE=<SONATYPE_USERNAME> --add` 
-..*`travis encrypt SONATYPE_PASSWORD=<SONATYPE_PASSWORD> --add` 
+..* `travis encrypt PGP_PASSPHRASE=<PASSPHRASE> --add` 
+..* `travis encrypt SONATYPE_USERNANE=<SONATYPE_USERNAME> --add` 
+..* `travis encrypt SONATYPE_PASSWORD=<SONATYPE_PASSWORD> --add` 
 
 These commands will add entries like below in your `.travis.yml` file.
 
