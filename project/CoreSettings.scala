@@ -1,6 +1,8 @@
+import com.typesafe.sbt.SbtPgp.autoImportImpl._
 import sbt.Keys._
 import sbt._
 import sbtassembly.AssemblyKeys._
+
 object CoreSettings {
 
   val sparkVersion = "1.6.1"
@@ -37,8 +39,10 @@ object CoreSettings {
 
   )
   val coreSettings = Seq(
-    //version := currentVersion,
-    crossScalaVersions := Seq("2.10.6","2.11.5"),
+    pgpPassphrase := Some( System.getenv().get("PGP_PASSPHRASE").toCharArray),
+    pgpSecretRing := file("local.secring.gpg"),
+    pgpPublicRing := file("local.pubring.gpg"),
+    crossScalaVersions := Seq("2.10.6", "2.11.5"),
     organization := organizationName,
     test in assembly := {},
     parallelExecution in Test := false,
@@ -54,29 +58,29 @@ object CoreSettings {
       val nexus = "https://oss.sonatype.org/"
       if (isSnapshot.value) Some(Resolvers.ossSnapshots)
       else Some(Resolvers.ossStaging)
-     },
+    },
     credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password),
     pomIncludeRepository := { _ => false },
     pomExtra := (
-  <url>http://recipegrace.com/recipegrace</url>
-  <licenses>
-    <license>
-      <name>BSD-style</name>
-      <url>http://www.opensource.org/licenses/bsd-license.php</url>
-      <distribution>repo</distribution>
-    </license>
-  </licenses>
-  <scm>
-    <url>git@github.com:recipegrace/BigLibrary.git</url>
-    <connection>scm:git:git@github.com:recipegrace/BigLibrary.git</connection>
-  </scm>
-  <developers>
-    <developer>
-      <id>feroshjacob</id>
-      <name>Ferosh Jacob</name>
-      <url>http://www.feroshjacob.com</url>
-    </developer>
-  </developers>),
+      <url>http://recipegrace.com/recipegrace</url>
+        <licenses>
+          <license>
+            <name>BSD-style</name>
+            <url>http://www.opensource.org/licenses/bsd-license.php</url>
+            <distribution>repo</distribution>
+          </license>
+        </licenses>
+        <scm>
+          <url>git@github.com:recipegrace/BigLibrary.git</url>
+          <connection>scm:git:git@github.com:recipegrace/BigLibrary.git</connection>
+        </scm>
+        <developers>
+          <developer>
+            <id>feroshjacob</id>
+            <name>Ferosh Jacob</name>
+            <url>http://www.feroshjacob.com</url>
+          </developer>
+        </developers>),
     resolvers ++= Resolvers.allResolvers)
 
   val electricSettings = Seq(

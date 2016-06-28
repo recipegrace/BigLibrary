@@ -50,11 +50,8 @@ class WordCountTest extends ElectricJobTest {
 
 # Developers 
 
-To publish a new version
+[OSS + travis+ sbt](https://github.com/recipegrace/BigLibrary/blob/master/doc/Oss-publish-travis.md)
 
-1. Create a OSS account
-2. Checkout project and make changes
-3. ./sbt + publish-signed
 
 
 
