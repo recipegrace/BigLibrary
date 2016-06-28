@@ -38,10 +38,19 @@ env:
 1. There are two files that need to be added to the repository along with the source code for enabling the encryption from travis: 1) `secring.gpg` and 2) `pubring.gpg`. In OSX, the files are found in `~/.gnupg/`. You can copy
 that files to the *ROOT* folder of the project (add .gitignore entries to ignore will pushing to the repository). 
 2. After copying the two files: 1) `secring.gpg` and 2) `pubring.gpg`, issue these commands:
-  * `openssl aes-256-cbc -in secring.gpg -out secring.gpg.enc -pass pass:<PGP_PASSPHRASE>
-  * `openssl aes-256-cbc -in pubring.gpg -out pubring.gpg.enc -pass pass:<PGP_PASSPHRASE>
+  * `openssl aes-256-cbc -in secring.gpg -out secring.gpg.enc -pass pass:<PGP_PASSPHRASE>`
+  * `openssl aes-256-cbc -in pubring.gpg -out pubring.gpg.enc -pass pass:<PGP_PASSPHRASE>`
 
+#### Step 4. Configure the `.travis.yml` to read the encrypted files and decrypt.
 
-#### Step 4. Configure the `Build.scala/build.sbt` to read the credentials from environment variables available in travis.
+1. Add the following section to the `.travis.yml` file.
+```YAML
+before_install:
+- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in secring.gpg.enc -out secring.gpg -d
+- openssl aes-256-cbc -pass pass:$ENCRYPTION_PASSWORD -in pubring.gpg.enc -out pubring.gpg -d
+```
+
+#### Step 5. Configure the `Build.scala/build.sbt` to read the credentials from environment variables available in travis.
+
 
  
