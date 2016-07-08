@@ -14,11 +14,16 @@ object CoreSettings {
 
   val password = System.getenv().get("SONATYPE_PASSWORD")
 
+  val passphrase = System.getenv().get("PGP_PASSPHRASE") match {
+      case x:String => x
+      case null => ""
+      }
+
   // sbt-assembly settings for building a fat jar
   lazy val sparkAssemblySettings = Seq(
 
     assemblyJarName in assembly := {
-      name.value + "-" + version.value + ".jar"
+      name.value + "-" +version.value + ".jar"
     },
 
     // Drop these jars
@@ -39,7 +44,8 @@ object CoreSettings {
 
   )
   val coreSettings = Seq(
-    pgpPassphrase := Some( System.getenv().get("PGP_PASSPHRASE").toCharArray),
+
+    pgpPassphrase := Some( passphrase.toCharArray),
     pgpSecretRing := file("local.secring.gpg"),
     pgpPublicRing := file("local.pubring.gpg"),
     crossScalaVersions := Seq("2.10.6", "2.11.5"),
@@ -52,7 +58,8 @@ object CoreSettings {
       "org.apache.commons" % "commons-lang3" % "3.4",
       "commons-io" % "commons-io" % "2.4",
       "com.thoughtworks.paranamer" % "paranamer-parent" % "2.4.1" pomOnly(),
-      "info.debatty" % "java-string-similarity" % "0.13"
+      "info.debatty" % "java-string-similarity" % "0.13",
+      "org.slf4j" % "slf4j-log4j12" % "1.7.10" % "test"
     ),
     publishTo := {
       val nexus = "https://oss.sonatype.org/"

@@ -6,8 +6,12 @@ package com.recipegrace.biglibrary.core
   */
 class UnZipFileTest extends BaseTest with ZipArchive{
 
-  test("zip file test") {
+  test("zip file test without root directory") {
     unZip("files/profiles.zip").nonEmpty should equal (true)
+  }
+
+  test("zip file test with root directory") {
+    unZip("files/a.zip").nonEmpty should equal (true)
   }
 
 }
