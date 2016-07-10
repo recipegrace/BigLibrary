@@ -24,6 +24,7 @@ abstract class ElectricJob[T:ClassTag] extends SparkContextCreator with Argument
 
 
 
+
   def argumentsToObject(args:Array[String]): T = {
     import scala.reflect._
     val clazz = classTag[T].runtimeClass
