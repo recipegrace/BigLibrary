@@ -11,6 +11,7 @@ import com.recipegrace.biglibrary.electricexamples.sanitycheck.SanityClass
 case class InAndOut(input:String, output:Int, input1:Double, flag:Boolean, float1:Float)
 case class NotPrimitiveArgument(inAndOut: InAndOut, sanityClass: SanityClass )
 case class NotPrimitiveArgument1(threshold:Float, other:String ,inAndOut: InAndOut, sanityClass: SanityClass )
+case class NotSupportedCompoundType(x:NotPrimitiveArgument)
 class SparkJobArgumentTest extends ElectricJobTest {
 
 
@@ -48,6 +49,17 @@ class SparkJobArgumentTest extends ElectricJobTest {
     case class NoInput
     object Test1 extends ElectricJob[NoInput]{
       override def execute(t: NoInput)(implicit ec: ElectricContext): Unit = {}
+    }
+    intercept[AssertionError]{
+      val obj = Test1.argumentsToObject(list)
+    }
+  }
+
+  test("complex argument test") {
+    val list = Array("--input", "bob")
+    case class NoInput
+    object Test1 extends ElectricJob[NotSupportedCompoundType]{
+      override def execute(t: NotSupportedCompoundType)(implicit ec: ElectricContext): Unit = {}
     }
     intercept[AssertionError]{
       val obj = Test1.argumentsToObject(list)
