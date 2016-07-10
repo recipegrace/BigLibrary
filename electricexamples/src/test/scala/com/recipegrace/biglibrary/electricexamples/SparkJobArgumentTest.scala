@@ -9,7 +9,8 @@ import com.recipegrace.biglibrary.electricexamples.sanitycheck.SanityClass
   * Created by fjacob on 9/25/15.
   */
 case class InAndOut(input:String, output:Int, input1:Double, flag:Boolean, float1:Float)
-
+case class NotPrimitiveArgument(inAndOut: InAndOut, sanityClass: SanityClass )
+case class NotPrimitiveArgument1(threshold:Float, other:String ,inAndOut: InAndOut, sanityClass: SanityClass )
 class SparkJobArgumentTest extends ElectricJobTest {
 
 
@@ -67,6 +68,32 @@ class SparkJobArgumentTest extends ElectricJobTest {
     intercept[AssertionError] {
       Test1.argumentsToObject(list).getX shouldBe "bob"
     }
+  }
+
+  test("sanity class argument not primitive test") {
+    val list = Array("--inAndOut.input", "bob", "--inAndOut.output","22",
+      "--inAndOut.flag","true" , "--inAndOut.input1", "1.4",
+      "--inAndOut.float1", "1.5f","--sanityClass.x", "sam" )
+    object Test1 extends ElectricJob[NotPrimitiveArgument]{
+      override def execute(t: NotPrimitiveArgument)(implicit ec: ElectricContext): Unit = {}
+    }
+    Test1.argumentsToObject(list).inAndOut.input shouldBe "bob"
+    Test1.argumentsToObject(list).sanityClass.getX shouldBe "sam"
+
+  }
+  test("sanity class argument not primitive test 2") {
+    val list = Array("--inAndOut.input", "bob", "--inAndOut.output","22",
+      "--inAndOut.flag","true" , "--inAndOut.input1", "1.4",
+      "--inAndOut.float1", "1.5f","--sanityClass.x", "sam", "--threshold", "1.5", "--other", "this is cool" )
+    object Test1 extends ElectricJob[NotPrimitiveArgument1]{
+      override def execute(t: NotPrimitiveArgument1)(implicit ec: ElectricContext): Unit = {}
+    }
+    val test1 = Test1.argumentsToObject(list)
+
+    test1.inAndOut.input shouldBe "bob"
+    test1.sanityClass.getX shouldBe "sam"
+    test1.threshold shouldBe 1.5f
+    test1.other shouldBe "this is cool"
   }
 }
 
