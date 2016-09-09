@@ -5,8 +5,8 @@ import sbtassembly.AssemblyKeys._
 
 object CoreSettings {
 
-  val sparkVersion = "1.6.1"
-  val currentScalaVersion = "2.10.6"
+  val sparkVersion = "2.0.0"
+  val currentScalaVersion = "2.11.6"
   //val currentVersion = "0.0.3"
   val organizationName = "com.recipegrace"
 
@@ -48,7 +48,8 @@ object CoreSettings {
     pgpPassphrase := Some( passphrase.toCharArray),
     pgpSecretRing := file("local.secring.gpg"),
     pgpPublicRing := file("local.pubring.gpg"),
-    crossScalaVersions := Seq("2.10.6", "2.11.5"),
+    scalaVersion  := currentScalaVersion,
+    //crossScalaVersions := Seq("2.10.6", "2.11.5"),
     organization := organizationName,
     test in assembly := {},
     parallelExecution in Test := false,
