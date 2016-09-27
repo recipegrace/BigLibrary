@@ -46,7 +46,7 @@ class SparkJobArgumentTest extends ElectricJobTest {
 
   test("inner class test") {
     val list = Array("--input", "bob")
-    case class NoInput
+    case class NoInput(x:String)
     object Test1 extends ElectricJob[NoInput]{
       override def execute(t: NoInput)(implicit ec: ElectricContext): Unit = {}
     }
@@ -57,7 +57,7 @@ class SparkJobArgumentTest extends ElectricJobTest {
 
   test("complex argument test") {
     val list = Array("--input", "bob")
-    case class NoInput
+    case class NoInput(x:String)
     object Test1 extends ElectricJob[NotSupportedCompoundType]{
       override def execute(t: NotSupportedCompoundType)(implicit ec: ElectricContext): Unit = {}
     }
