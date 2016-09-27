@@ -18,23 +18,6 @@ class GenerateNumbersTest extends ElectricJobTest {
     val lines = readFilesInDirectory(output, "part")
     lines should contain("1")
   }
-  test("word count") {
 
-    val input = createFile {
-      """
-        hello world
-        Zero world
-        Some world
-      """.stripMargin
-    }
-
-    val output = createTempPath()
-
-    launch(WordCount, InputAndOutput(input, output))
-
-    val lines = readFilesInDirectory(output, "part")
-    lines should contain("hello\t1")
-    lines should contain("world\t3")
-  }
 
 }
