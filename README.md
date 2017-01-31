@@ -15,16 +15,22 @@ Biglibrary realize a bigdata program as a pair: 1) Actual job and 2) Test job. T
 
 
 ```scala
-case class InputAndOutput(input:String, output:String)
 object WordCount extends SequenceFileJob[InputAndOutput] {
-  override def execute(argument:InputAndOutput)(implicit ec: ElectricContext) = {
-    val file = readFile(argument.input, false)
+  override def execute(argument: InputAndOutput)(implicit ec: ElectricSession) = {
+    val session = ec.getSparkSession
+
+    import session.implicits._
+    val file = ec.text(argument.input)
     val words = file.flatMap(_.toLowerCase.replaceAll("[^a-zA-Z0-9\\s]", "").split("\\s+"))
-    val wordCounts = words
-      .map(x => (x, 1)).reduceByKey(_ + _)
-      .map(f => f._1 + "\t" + f._2)
-    writeFile(wordCounts, argument.output)
+    words
+      .groupByKey(f => f)
+      .count()
+      .write
+      .option("delimiter", "\t")
+      .csv(argument.output)
+
   }
+
 }
 ```  
 WordCountTest 
