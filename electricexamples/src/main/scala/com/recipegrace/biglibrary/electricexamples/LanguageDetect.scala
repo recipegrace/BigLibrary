@@ -6,7 +6,7 @@ import java.nio.file.Paths
 import com.cybozu.labs.langdetect.DetectorFactory
 import com.recipegrace.biglibrary.core.CreateTemporaryFiles
 import com.recipegrace.biglibrary.core.ZipArchive
-import com.recipegrace.biglibrary.electric.{SequenceFileJob, ElectricContext}
+import com.recipegrace.biglibrary.electric.{SequenceFileJob, ElectricSession}
 
 import org.apache.spark.SparkFiles
 
@@ -31,21 +31,24 @@ object LanguageDetect extends SequenceFileJob[InputsAndOutput] with CreateTempor
 
 
 
-  override def execute(args:InputsAndOutput)(implicit ec: ElectricContext): Unit = {
+  override def execute(args:InputsAndOutput)(implicit ec: ElectricSession): Unit = {
 
 
-    ec.sparkContext.addFile(args.input2)
+    ec.addFile(args.input2)
+
+   val session = ec.getSparkSession
+
+     import session.implicits._
 
 
+    val content = ec.text(args.input1)
 
-
-    val content = readFile(args.input1)
       .map(f => {
 
         (LanguageDetectWrapper.detectLanguage(f), f)
       })
-      .map(f => f._1 + "\t" + f._2 )
+      .write
+      .csv(args.output)
 
-    writeFile(content, args.output)
   }
 }

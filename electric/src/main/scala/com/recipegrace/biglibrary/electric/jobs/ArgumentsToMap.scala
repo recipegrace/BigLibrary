@@ -1,9 +1,6 @@
 package com.recipegrace.biglibrary.electric.jobs
 
-import java.lang
-import java.lang.reflect.Constructor
 
-import com.recipegrace.biglibrary.electric.{ElectricContext, ElectricJob, FileAccess}
 import com.thoughtworks.paranamer.AdaptiveParanamer
 
 /**

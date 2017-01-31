@@ -1,6 +1,6 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.{SequenceFileJob, ElectricContext}
+import com.recipegrace.biglibrary.electric.{SequenceFileJob, ElectricSession}
 
 
 /**
@@ -8,11 +8,14 @@ import com.recipegrace.biglibrary.electric.{SequenceFileJob, ElectricContext}
   */
 case class InputsAndOutput(input1:String,input2:String, output:String)
 object AppendList extends SequenceFileJob[InputsAndOutput] {
-  override def execute(arg:InputsAndOutput)(implicit ec: ElectricContext): Unit = {
+  override def execute(arg:InputsAndOutput)(implicit ec: ElectricSession): Unit = {
 
 
-    val first = readFile(arg.input1)
-    val second = readFile(arg.input2)
-    writeFile(first ++ second, arg.output)
+
+    val first = ec.text(arg.input1)
+    val second = ec.text(arg.input2)
+
+
+    first.union(second).write.csv(arg.output)
   }
 }
