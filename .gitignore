@@ -26,3 +26,4 @@ project/project
 local.*
 #Project-specific changes
 .tests/
+.DS_Store
