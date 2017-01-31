@@ -1,16 +1,16 @@
 package com.recipegrace.biglibrary.electricexamples
 
-import com.recipegrace.biglibrary.electric.{SequenceFileJob, ElectricContext}
+import com.recipegrace.biglibrary.electric.{ElectricSession, SequenceFileJob}
 
 /**
   * Created by Ferosh Jacob on 11/3/15.
   */
 case class InputAndOutput(input:String, output:String)
 object ConvertToSequenceFile extends SequenceFileJob[InputAndOutput] {
-  override def execute(argument:InputAndOutput)(implicit ec: ElectricContext): Unit = {
+  override def execute(argument:InputAndOutput)(implicit ec: ElectricSession): Unit = {
 
-    val out = ec.sparkContext.textFile(argument.input)
+    val out = ec.text(argument.input)
 
-    writeFile(out, argument.output)
+    out.write.save(argument.output)
   }
 }
