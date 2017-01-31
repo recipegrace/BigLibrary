@@ -1,8 +1,8 @@
 package com.recipegrace.biglibrary.electric.tests
 
-import com.recipegrace.biglibrary.core.{BaseTest, CreateTemporaryFiles}
-import com.recipegrace.biglibrary.electric.ElectricSession
-import com.recipegrace.biglibrary.electric.spark.SparkSessionCreator
+import com.recipegrace.biglibrary.core.{CreateTemporaryFiles, BaseTest}
+import com.recipegrace.biglibrary.electric.ElectricContext
+import com.recipegrace.biglibrary.electric.spark.SparkContextCreator
 import org.apache.spark.SparkContext
 
 
@@ -11,11 +11,11 @@ import org.apache.spark.SparkContext
   */
 
 
-abstract class ElectricTraitTest extends BaseTest with SparkSessionCreator  with CreateTemporaryFiles{
+abstract class ElectricTraitTest extends BaseTest with SparkContextCreator  with CreateTemporaryFiles{
 
 
   def loadContext = {
-    val ss = createSparkSession(true, System.currentTimeMillis() + "")
-    new ElectricSession(true, ss)
+    val sc: SparkContext = createSparkContext(true, System.currentTimeMillis() + "")
+    ElectricContext(true, sc)
   }
 }
