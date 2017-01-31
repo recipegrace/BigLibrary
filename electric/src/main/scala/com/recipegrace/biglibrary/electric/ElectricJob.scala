@@ -2,21 +2,21 @@ package com.recipegrace.biglibrary.electric
 
 
 import com.recipegrace.biglibrary.electric.jobs.ArgumentsToMap
-import com.recipegrace.biglibrary.electric.spark.SparkContextCreator
-import com.thoughtworks.paranamer.{AdaptiveParanamer}
+import com.recipegrace.biglibrary.electric.spark.SparkSessionCreator
+import com.thoughtworks.paranamer.AdaptiveParanamer
 import com.typesafe.scalalogging.slf4j.Logger
-import org.apache.spark.SparkContext
+import org.apache.spark.sql.SparkSession
 import org.slf4j.LoggerFactory
 
 import scala.reflect.ClassTag
-case class ElectricContext(isLocal: Boolean, sparkContext: SparkContext)
-trait SequenceFileJob[T] extends ElectricJob[T] with FileAccess
-abstract class ElectricJob[T:ClassTag] extends SparkContextCreator with ArgumentsToMap  {
+
+trait SequenceFileJob[T] extends ElectricJob[T]
+abstract class ElectricJob[T:ClassTag] extends SparkSessionCreator with ArgumentsToMap  {
 
 
 
 
-  def execute(t: T)(implicit ec: ElectricContext): Unit
+  def execute(t: T)(implicit ec: ElectricSession): Unit
 
   def main(args: Array[String]) = {
     run(args, false)
@@ -51,8 +51,8 @@ abstract class ElectricJob[T:ClassTag] extends SparkContextCreator with Argument
     val t0 = System.currentTimeMillis()
     logger.info("starting job:" + jobName)
 
-    val sc = createSparkContext(isLocal, jobName)
-    implicit val context = ElectricContext(isLocal, sc)
+    val sc = createSparkSession(isLocal, jobName)
+    implicit val context = new ElectricSession(isLocal, sc)
     execute(args)(context)
     sc.stop()
     val t1 = System.currentTimeMillis()
