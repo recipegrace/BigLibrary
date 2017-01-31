@@ -1,7 +1,7 @@
 package com.recipegrace.biglibrary.electricexamples
 
 import com.recipegrace.biglibrary.electric.tests.ElectricJobTest
-import com.recipegrace.biglibrary.electric.{ElectricJob, ElectricSession}
+import com.recipegrace.biglibrary.electric.{ElectricJob, ElectricContext}
 import com.recipegrace.biglibrary.electricexamples.sanitycheck.SanityClass
 
 
@@ -18,7 +18,7 @@ class SparkJobArgumentTest extends ElectricJobTest {
   test("argument test") {
     val list = Array("--input", "bob", "--output","22", "--flag","true" , "--input1", "1.4", "--float1", "1.5f")
      object Test1 extends ElectricJob[InAndOut]{
-      override def execute(t: InAndOut)(implicit ec: ElectricSession): Unit = {}
+      override def execute(t: InAndOut)(implicit ec: ElectricContext): Unit = {}
     }
     val obj = Test1.argumentsToObject(list)
     obj.input shouldBe "bob"
@@ -36,7 +36,7 @@ class SparkJobArgumentTest extends ElectricJobTest {
   test("more than one constructor test") {
     val list = Array("--input", "bob")
     object Test1 extends ElectricJob[String]{
-      override def execute(t: String)(implicit ec: ElectricSession): Unit = {}
+      override def execute(t: String)(implicit ec: ElectricContext): Unit = {}
     }
     intercept[AssertionError]{
       val obj = Test1.argumentsToObject(list)
@@ -48,7 +48,7 @@ class SparkJobArgumentTest extends ElectricJobTest {
     val list = Array("--input", "bob")
     case class NoInput(x:String)
     object Test1 extends ElectricJob[NoInput]{
-      override def execute(t: NoInput)(implicit ec: ElectricSession): Unit = {}
+      override def execute(t: NoInput)(implicit ec: ElectricContext): Unit = {}
     }
     intercept[AssertionError]{
       val obj = Test1.argumentsToObject(list)
@@ -59,7 +59,7 @@ class SparkJobArgumentTest extends ElectricJobTest {
     val list = Array("--input", "bob")
     case class NoInput(x:String)
     object Test1 extends ElectricJob[NotSupportedCompoundType]{
-      override def execute(t: NotSupportedCompoundType)(implicit ec: ElectricSession): Unit = {}
+      override def execute(t: NotSupportedCompoundType)(implicit ec: ElectricContext): Unit = {}
     }
     intercept[AssertionError]{
       val obj = Test1.argumentsToObject(list)
@@ -68,14 +68,14 @@ class SparkJobArgumentTest extends ElectricJobTest {
   test("sanity class test") {
     val list = Array("--x", "bob")
     object Test1 extends ElectricJob[SanityClass]{
-      override def execute(t: SanityClass)(implicit ec: ElectricSession): Unit = {}
+      override def execute(t: SanityClass)(implicit ec: ElectricContext): Unit = {}
     }
     Test1.argumentsToObject(list).getX shouldBe "bob"
   }
   test("missing value test") {
     val list:Array[String] = Array()
     object Test1 extends ElectricJob[SanityClass]{
-      override def execute(t: SanityClass)(implicit ec: ElectricSession): Unit = {}
+      override def execute(t: SanityClass)(implicit ec: ElectricContext): Unit = {}
     }
     intercept[AssertionError] {
       Test1.argumentsToObject(list).getX shouldBe "bob"
@@ -87,7 +87,7 @@ class SparkJobArgumentTest extends ElectricJobTest {
       "--inAndOut.flag","true" , "--inAndOut.input1", "1.4",
       "--inAndOut.float1", "1.5f","--sanityClass.x", "sam" )
     object Test1 extends ElectricJob[NotPrimitiveArgument]{
-      override def execute(t: NotPrimitiveArgument)(implicit ec: ElectricSession): Unit = {}
+      override def execute(t: NotPrimitiveArgument)(implicit ec: ElectricContext): Unit = {}
     }
     Test1.argumentsToObject(list).inAndOut.input shouldBe "bob"
     Test1.argumentsToObject(list).sanityClass.getX shouldBe "sam"
@@ -98,7 +98,7 @@ class SparkJobArgumentTest extends ElectricJobTest {
       "--inAndOut.flag","true" , "--inAndOut.input1", "1.4",
       "--inAndOut.float1", "1.5f","--sanityClass.x", "sam", "--threshold", "1.5", "--other", "this is cool" )
     object Test1 extends ElectricJob[NotPrimitiveArgument1]{
-      override def execute(t: NotPrimitiveArgument1)(implicit ec: ElectricSession): Unit = {}
+      override def execute(t: NotPrimitiveArgument1)(implicit ec: ElectricContext): Unit = {}
     }
     val test1 = Test1.argumentsToObject(list)
 
