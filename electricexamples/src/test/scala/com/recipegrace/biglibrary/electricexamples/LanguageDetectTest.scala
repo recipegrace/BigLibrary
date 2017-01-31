@@ -16,13 +16,13 @@ class LanguageDetectTest extends ElectricJobTest  {
 
     val output = createTempPath()
     val content = createFile(
-      """ Hello world is a very popular word
+      """ Hello world is a very, popular word
         Hello again """.stripMargin)
 
     launch(LanguageDetect, InputsAndOutput(content, "files/profiles.zip", output))
 
     val lines = readFilesInDirectory(output, "part", Charset.forName("ISO-8859-1"))
-    lines should contain("en\tHello world is a very popular word")
+    lines should contain("en,\"Hello world is a very, popular word\"")
   }
 
 }

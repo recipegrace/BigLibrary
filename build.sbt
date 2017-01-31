@@ -1,13 +1,11 @@
-import com.typesafe.sbt.SbtPgp.autoImportImpl._
-import sbt.Keys._
-import sbt._
-import sbtassembly.AssemblyKeys._
 
-object CoreSettings {
+  val mvnrepository = "MVN Repo" at "http://central.maven.org/maven2/"
+  val ossSnapshots =  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/content/repositories/snapshots"
+  val ossStaging =  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/service/local/staging/deploy/maven2"
+  val allResolvers = Seq(mvnrepository)
 
-  val sparkVersion = "2.0.0"
+  val sparkVersion = "2.0.2"
   val currentScalaVersion = "2.11.6"
-  //val currentVersion = "0.0.3"
   val organizationName = "com.recipegrace"
 
   val username = System.getenv().get("SONATYPE_USERNAME")
@@ -64,8 +62,8 @@ object CoreSettings {
     ),
     publishTo := {
       val nexus = "https://oss.sonatype.org/"
-      if (isSnapshot.value) Some(Resolvers.ossSnapshots)
-      else Some(Resolvers.ossStaging)
+      if (isSnapshot.value) Some(ossSnapshots)
+      else Some(ossStaging)
     },
     credentials += Credentials("Sonatype Nexus Repository Manager", "oss.sonatype.org", username, password),
     pomIncludeRepository := { _ => false },
@@ -89,14 +87,15 @@ object CoreSettings {
             <url>http://www.feroshjacob.com</url>
           </developer>
         </developers>),
-    resolvers ++= Resolvers.allResolvers)
+    resolvers ++= allResolvers)
 
   val electricSettings = Seq(
     name := "Electric",
     publishArtifact in Test := true,
     parallelExecution in Test := false,
     libraryDependencies ++= Seq(
-      Libraries.sparkCore
+      "org.apache.spark" %% "spark-core" % sparkVersion % "provided",
+      "org.apache.spark" %% "spark-mllib" % sparkVersion % "provided"
     )
   )
 
@@ -105,14 +104,28 @@ object CoreSettings {
     test in assembly := {},
     libraryDependencies ++= Seq(
       "com.cybozu.labs" % "langdetect" % "1.1-20120112",
-      Libraries.sparkCore)
+      "org.apache.spark" %% "spark-core" % sparkVersion % "provided",
+      "org.apache.spark" %% "spark-mllib" % sparkVersion % "provided"
+     )
   )
 
 
-  object Libraries {
-    val sparkCore = "org.apache.spark" %% "spark-core" % sparkVersion % "provided"
-    val sparkMllib = "org.apache.spark" %% "spark-mllib" % sparkVersion % "provided"
-    val sparkSql = "org.apache.spark" %% "spark-sql" % sparkVersion % "provided"
-  }
+  
+  lazy val core = (project in file("core")).
+    settings(coreSettings: _*)
 
-}
+
+  lazy val electric = (project in file("electric")).
+    settings(coreSettings ++ electricSettings: _*) dependsOn (core)
+
+
+  lazy val electricexamples = (project in file("electricexamples")).
+    settings(coreSettings ++ electricJobSettings ++ sparkAssemblySettings: _*) dependsOn (electric)
+
+
+  lazy val biglibrary = (project in file(".")).
+    settings(coreSettings: _*) aggregate (core,electric)
+
+
+
+
