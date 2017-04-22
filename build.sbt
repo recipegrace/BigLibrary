@@ -5,7 +5,7 @@
   val allResolvers = Seq(mvnrepository)
 
   val sparkVersion = "2.0.2"
-  val currentScalaVersion = "2.11.6"
+  val currentScalaVersion = "2.12.2"
   val organizationName = "com.recipegrace"
 
   val username = System.getenv().get("SONATYPE_USERNAME")
@@ -47,7 +47,6 @@
     pgpSecretRing := file("local.secring.gpg"),
     pgpPublicRing := file("local.pubring.gpg"),
     scalaVersion  := currentScalaVersion,
-    //crossScalaVersions := Seq("2.10.6", "2.11.5"),
     organization := organizationName,
     test in assembly := {},
     parallelExecution in Test := false,
