@@ -51,8 +51,9 @@
     test in assembly := {},
     parallelExecution in Test := false,
     libraryDependencies ++= Seq(
-      "org.scalatest" %% "scalatest" % "2.2.5",
-      "com.typesafe.scala-logging" %% "scala-logging-slf4j" % "2.1.2",
+      "org.scalatest" %% "scalatest" % "3.0.1",
+      "com.typesafe.scala-logging" %% "scala-logging" % "3.5.0",
+      "ch.qos.logback" % "logback-classic" % "1.1.7",
       "org.apache.commons" % "commons-lang3" % "3.4",
       "commons-io" % "commons-io" % "2.4",
       "com.thoughtworks.paranamer" % "paranamer-parent" % "2.4.1" pomOnly(),
