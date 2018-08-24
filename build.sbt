@@ -26,7 +26,7 @@
     },
 
     // Drop these jars
-    assemblyExcludedJars in assembly <<= (fullClasspath in assembly) map { cp =>
+    assemblyExcludedJars in assembly :={
       val excludes = Set(
         "jsp-api-2.1-6.1.14.jar",
         "jsp-2.1-6.1.14.jar",
@@ -38,6 +38,7 @@
         "scala-xml-2.11.0-M4.jar",
         "jsr311-api-1.1.1.jar"
       )
+      val cp = (fullClasspath in assembly).value
       cp filter { jar => excludes(jar.data.getName) }
     }
 

@@ -6,7 +6,7 @@ import com.recipegrace.biglibrary.gas.tests.GasJobTest
 class SimpleGoogleCloudOpsTest extends GasJobTest {
 
 
-  ignore("simple ops") {
+  test("simple ops") {
     val output = createTempPath()
     launch(SimpleGoogleCloudOps,InAndOutput(GCSInputLocation ("files/terms.txt"), GCSOutputLocation( output )))
 
