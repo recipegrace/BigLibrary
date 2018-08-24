@@ -1,5 +1,4 @@
-package com.recipegrace.biglibrary.electric.jobs
-
+package com.recipegrace.biglibrary.core
 
 import com.thoughtworks.paranamer.AdaptiveParanamer
 
@@ -7,9 +6,7 @@ import com.thoughtworks.paranamer.AdaptiveParanamer
   * Created by Ferosh Jacob on 10/16/15.
   */
 
-
-
-trait ArgumentsToMap {
+trait ArgsToMap {
 
 
   private def convertArgsToMap(args: Array[String]) = {
@@ -21,7 +18,6 @@ trait ArgumentsToMap {
       }
     }
   }
-
 
   def toArgumentObject(parameterName: String, parameterType: String, argumentValues: Map[String, String]):Object ={
     val paranamer = new AdaptiveParanamer()
@@ -36,10 +32,7 @@ trait ArgumentsToMap {
     val instance:Object = constructor.newInstance(arguments: _*).asInstanceOf[Object]
     instance
   }
-
-  private def toArgument(parameterName:String, parameterType:String, argumentValues:Map[String,String], isLevelOne:Boolean=false) = {
-
-    def getArgumentValues(argumentName:String)= {
+  def getArgumentValues(argumentName:String,argumentValues:Map[String,String])= {
       argumentValues.get(argumentName) match {
         case Some(x) => x
         case _ => {
@@ -48,13 +41,15 @@ trait ArgumentsToMap {
         }
       }
     }
+
+  def toArgument(parameterName:String, parameterType:String, argumentValues:Map[String,String], isLocal:Boolean,isLevelOne:Boolean=false) = {
     assert(!parameterName.startsWith("$"), "the Argument class should be declared at package scope, not an inner scope")
     parameterType match {
-      case "java.lang.Integer" | "int" => new Integer(getArgumentValues(parameterName).toInt)
-      case "java.lang.String"  => getArgumentValues(parameterName)
-      case "java.lang.Double"|"double" => new java.lang.Double(getArgumentValues(parameterName).toDouble)
-      case "java.lang.Float" | "float"  => new java.lang.Float(getArgumentValues(parameterName).toFloat)
-      case "java.lang.Boolean" | "boolean" => new java.lang.Boolean( getArgumentValues(parameterName).toBoolean)
+      case "java.lang.Integer" | "int" => new Integer(getArgumentValues(parameterName,argumentValues).toInt)
+      case "java.lang.String"  => getArgumentValues(parameterName,argumentValues)
+      case "java.lang.Double"|"double" => new java.lang.Double(getArgumentValues(parameterName,argumentValues).toDouble)
+      case "java.lang.Float" | "float"  => new java.lang.Float(getArgumentValues(parameterName,argumentValues).toFloat)
+      case "java.lang.Boolean" | "boolean" => new java.lang.Boolean( getArgumentValues(parameterName,argumentValues).toBoolean)
       case x:String => {
        if(isLevelOne)
          assert(false, "Only supported one level")
@@ -62,10 +57,10 @@ trait ArgumentsToMap {
       }
     }
   }
-  def convertArgsToArgs(args: Array[String], parameters:Array[(String,String)]) :Array[Object]= {
+  def convertArgsToArgs(args: Array[String], parameters:Array[(String,String)],isLocal:Boolean) :Array[Object]= {
     val map = convertArgsToMap(args)
     for( (parameterName, parameterType) <- parameters)
-      yield  toArgument(parameterName,parameterType,map)
+      yield  toArgument(parameterName,parameterType,map,isLocal)
   }
 
 
@@ -102,9 +97,3 @@ trait ArgumentsToMap {
 
 
 }
-
-
-
-
-
-

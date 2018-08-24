@@ -45,13 +45,26 @@ trait CreateTemporaryFiles {
 
   }
 
+  def createFileWithContent(bytes: Array[Byte], fileName: String): Unit = {
+
+    import java.io.FileOutputStream
+    val stream = new FileOutputStream(fileName)
+    try
+      stream.write(bytes)
+    finally stream.close()
+
+  }
+
   def createTempPath(): String = {
     createOutPutFile(false)
   }
+  def createDataPath(): String = {
+    createOutPutFile(folder = ".data")
+  }
 
-  def createOutPutFile(createFile: Boolean = true,isDirectory:Boolean=false): String = {
+  def createOutPutFile(createFile: Boolean = true,isDirectory:Boolean=false, folder:String = ".tests"): String = {
 
-    val temporaryDirectory = ".tests"
+    val temporaryDirectory = folder
     val directory = new File(temporaryDirectory)
 
     if (!directory.exists()) new File(temporaryDirectory).mkdir()
