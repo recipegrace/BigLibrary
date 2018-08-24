@@ -4,7 +4,8 @@
   val ossStaging =  "Sonatype OSS Snapshots" at "https://oss.sonatype.org/service/local/staging/deploy/maven2"
   val allResolvers = Seq(mvnrepository)
 
-  val sparkVersion = "2.0.2"
+  val sparkVersion = "2.3.1"
+  val gcsVersion = "1.40.0"
   val currentScalaVersion = "2.11.6"
   val organizationName = "com.recipegrace"
 
@@ -41,6 +42,12 @@
     }
 
   )
+  lazy val assemblySettings = Seq(
+
+    assemblyJarName in assembly := {
+      name.value + "-" +version.value + ".jar"
+    }
+  )
   val coreSettings = Seq(
 
     pgpPassphrase := Some( passphrase.toCharArray),
@@ -57,6 +64,7 @@
       "org.apache.commons" % "commons-lang3" % "3.4",
       "commons-io" % "commons-io" % "2.4",
       "com.thoughtworks.paranamer" % "paranamer-parent" % "2.4.1" pomOnly(),
+       "com.thoughtworks.paranamer" % "paranamer" % "2.8",
       "info.debatty" % "java-string-similarity" % "0.13",
       "org.slf4j" % "slf4j-log4j12" % "1.7.10" % "test"
     ),
@@ -84,7 +92,7 @@
           <developer>
             <id>feroshjacob</id>
             <name>Ferosh Jacob</name>
-            <url>http://www.feroshjacob.com</url>
+            <url>https://feroshjacob.github.io</url>
           </developer>
         </developers>),
     resolvers ++= allResolvers)
@@ -92,13 +100,26 @@
   val electricSettings = Seq(
     name := "Electric",
     publishArtifact in Test := true,
-    parallelExecution in Test := false,
     libraryDependencies ++= Seq(
       "org.apache.spark" %% "spark-core" % sparkVersion % "provided",
       "org.apache.spark" %% "spark-mllib" % sparkVersion % "provided"
     )
   )
 
+  val gasSettings = Seq(
+    name := "Gas",
+    publishArtifact in Test :=true,
+    libraryDependencies ++= Seq(
+    "com.google.cloud" % "google-cloud-storage" % gcsVersion 
+    )
+  )
+  val gasJobSettings = Seq(
+    name := "GasExamples",
+    publishArtifact in Test := false,
+    libraryDependencies ++= Seq(
+    "com.google.cloud" % "google-cloud-storage" % gcsVersion
+    )
+  )
   val electricJobSettings = Seq(
     name := "ElectricExamples",
     test in assembly := {},
@@ -122,9 +143,16 @@
   lazy val electricexamples = (project in file("electricexamples")).
     settings(coreSettings ++ electricJobSettings ++ sparkAssemblySettings: _*) dependsOn (electric)
 
+  lazy val gas = (project in file("gas")).
+    settings(coreSettings ++ gasSettings: _*) dependsOn (core)
+
+
+  lazy val gasexamples = (project in file("gasexamples")).
+    settings(coreSettings ++ gasJobSettings ++assemblySettings : _*) dependsOn (gas)
+
 
   lazy val biglibrary = (project in file(".")).
-    settings(coreSettings: _*) aggregate (core,electric)
+    settings(coreSettings: _*) aggregate (core,electric,gas)
 
 
 
