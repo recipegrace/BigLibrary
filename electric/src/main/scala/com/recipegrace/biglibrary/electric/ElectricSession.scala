@@ -26,6 +26,6 @@ class ElectricSession(isLocal: Boolean, sparkSession: SparkSession) {
 
 
   def addFile(fileName:String) = {
-    sparkSession.sparkContext.addFile(fileName)iii
+    sparkSession.sparkContext.addFile(fileName)
   }
 }
