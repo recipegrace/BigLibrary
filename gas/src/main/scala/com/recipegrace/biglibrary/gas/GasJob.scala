@@ -9,7 +9,6 @@ import com.typesafe.scalalogging.slf4j.Logger
 import org.slf4j.LoggerFactory
 
 import scala.reflect.ClassTag
-
 case class GasSession(isLocal:Boolean,storage: Storage)
 case class GCSInputLocation(inputFile:String)
 case class GCSOutputLocation(outputFile:String){

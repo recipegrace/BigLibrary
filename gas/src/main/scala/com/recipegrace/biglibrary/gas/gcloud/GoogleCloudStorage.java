@@ -65,7 +65,16 @@ public class GoogleCloudStorage {
         String prefixCalculated = prefix.endsWith("/") ? prefix : prefix+"/" ;
         Page<Blob> blobs = storage.list(bucketName, BlobListOption.currentDirectory(),
         BlobListOption.prefix(prefixCalculated));
-        Files.createDirectories(downloadTo);
+        File[] allContents = downloadTo.toFile().listFiles();
+        
+        if (allContents != null) {
+           for (File content : allContents) {
+             if(content.exists())content.delete(); 
+          }  
+        
+        }
+       Files.deleteIfExists(downloadTo);
+       Files.createDirectories(downloadTo);
 
         for (Blob blob : blobs.iterateAll()) {
             String[] lastSegment =blob.getName().split("/");
