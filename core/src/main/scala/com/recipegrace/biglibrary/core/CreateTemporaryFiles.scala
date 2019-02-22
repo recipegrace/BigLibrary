@@ -5,23 +5,26 @@ import java.nio.charset.{Charset, StandardCharsets}
 import java.nio.file.{Files, Paths}
 import java.util.zip.{ZipEntry, ZipInputStream}
 
-import com.typesafe.scalalogging.slf4j.Logger
-import org.slf4j.LoggerFactory
-
 import scala.collection.JavaConversions._
 import scala.util.Random
+import com.typesafe.scalalogging.{Logger}
 
 /**
   * Created by fjacob on 09/25/15.
   */
 trait CreateTemporaryFiles {
 
-  val logger = Logger(LoggerFactory.getLogger("CreateFile"))
+  val logger = Logger("CreateFile")
   val random = new Random(System.currentTimeMillis())
 
-  def readFilesInDirectory(directory: String, prefix: String = "", charset: Charset = StandardCharsets.US_ASCII): List[String] = {
+  def readFilesInDirectory(
+      directory: String,
+      prefix: String = "",
+      charset: Charset = StandardCharsets.US_ASCII
+  ): List[String] = {
 
-    val files = new java.io.File(directory).listFiles.filter(_.getName.startsWith(prefix))
+    val files =
+      new java.io.File(directory).listFiles.filter(_.getName.startsWith(prefix))
 
     val allFilesContent = for (file <- files)
       yield Files.readAllLines(Paths.get(file.getAbsolutePath), charset)
@@ -49,8 +52,7 @@ trait CreateTemporaryFiles {
 
     import java.io.FileOutputStream
     val stream = new FileOutputStream(fileName)
-    try
-      stream.write(bytes)
+    try stream.write(bytes)
     finally stream.close()
 
   }
@@ -62,7 +64,11 @@ trait CreateTemporaryFiles {
     createOutPutFile(folder = ".data")
   }
 
-  def createOutPutFile(createFile: Boolean = true,isDirectory:Boolean=false, folder:String = ".tests"): String = {
+  def createOutPutFile(
+      createFile: Boolean = true,
+      isDirectory: Boolean = false,
+      folder: String = ".tests"
+  ): String = {
 
     val temporaryDirectory = folder
     val directory = new File(temporaryDirectory)
@@ -70,7 +76,13 @@ trait CreateTemporaryFiles {
     if (!directory.exists()) new File(temporaryDirectory).mkdir()
 
     val outFile = if (createFile) {
-      val tempFile =  if(! isDirectory) Files.createTempFile(Paths.get(temporaryDirectory), "out", getFileName)
+      val tempFile =
+        if (!isDirectory)
+          Files.createTempFile(
+            Paths.get(temporaryDirectory),
+            "out",
+            getFileName
+          )
         else Files.createTempDirectory(getFileName)
       tempFile.toAbsolutePath.toString
 
@@ -86,6 +98,5 @@ trait CreateTemporaryFiles {
   def getFileName: String = {
     System.currentTimeMillis() + "" + random.nextFloat()
   }
-
 
 }
