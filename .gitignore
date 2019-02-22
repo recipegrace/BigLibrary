@@ -28,3 +28,7 @@ local.*
 .tests/
 .data/
 .DS_Store
+.bloop
+.metals/
+.scalafmt.conf
+project/.bloop/
