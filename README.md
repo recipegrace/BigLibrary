@@ -4,6 +4,8 @@
 [![Build Status](https://travis-ci.org/recipegrace/BigLibrary.svg?branch=master)](https://travis-ci.org/recipegrace/BigLibrary)
 
 
+
+
 <h3>WORA (Write Once Run Anywhere) framework</h3>
 The Biglibrary has been designed as a wrapper for bigdata programs (currently implemented for SPARK). 
 The library enables programmers 1) to customize execution for local and cluster modes, 2) functions for boiler plate code, and 3) guarantees deployable code.
