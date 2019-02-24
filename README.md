@@ -5,11 +5,10 @@
 
 
 
-
 <h3>WORA (Write Once Run Anywhere) framework</h3>
 The Biglibrary has been designed as a wrapper for bigdata programs (currently implemented for SPARK). 
 The library enables programmers 1) to customize execution for local and cluster modes, 2) functions for boiler plate code, and 3) guarantees deployable code.
-
+This project realizes the idea of executable pipelines that are unaware of the data.
 Biglibrary realize a bigdata program as a pair: 1) Actual job and 2) Test job. The actual job can be executed in a cluster using the 
 <a href="https://github.com/recipegrace/ScriptDB">ScriptDB</a>.  Few examples implemented using the BigLibrary  are given below.
 
