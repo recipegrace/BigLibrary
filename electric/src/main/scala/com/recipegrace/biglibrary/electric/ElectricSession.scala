@@ -21,6 +21,7 @@ class ElectricSession(isLocal: Boolean, sparkSession: SparkSession) {
 
   }
   def getSparkSession=this.sparkSession
+  def isLocalMode=this.isLocal
 
 
 
