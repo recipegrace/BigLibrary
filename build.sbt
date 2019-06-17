@@ -149,14 +149,14 @@ lazy val electric = (project in file("electric"))
   .settings(coreSettings ++ electricSettings ++ publishSettings: _*) dependsOn (core)
 
 lazy val electricexamples = (project in file("electricexamples")).settings(
-  coreSettings ++ electricJobSettings ++ noPublishSettings: _*
+  coreSettings ++ electricJobSettings ++ publishSettings: _*
 ) dependsOn (electric)
 
 lazy val gas = (project in file("gas"))
   .settings(coreSettings ++ gasSettings ++ publishSettings: _*) dependsOn (core)
 
 lazy val gasexamples = (project in file("gasexamples")).settings(
-  coreSettings ++ gasJobSettings ++ noPublishSettings: _*
+  coreSettings ++ gasJobSettings ++ publishSettings: _*
 ) dependsOn (gas)
 
 lazy val biglibrary = (project in file("."))
