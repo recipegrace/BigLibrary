@@ -5,12 +5,10 @@ val allResolvers = Seq(mvnrepository)
 
 val sparkVersion = "2.4.0"
 val gcsVersion = "1.40.0"
-val currentScalaVersion = "2.12.8"
 val organizationName = "com.recipegrace"
 lazy val scala212 = "2.12.8"
 lazy val scala211 = "2.11.12"
 lazy val supportedScalaVersions = List(scala212, scala211)
-scalaVersion in ThisBuild := scala212
 
 val username = System.getenv().get("SONATYPE_USERNAME")
 
@@ -54,8 +52,6 @@ val coreSettings = Seq(
   pgpPassphrase := Some(passphrase.toCharArray),
   pgpSecretRing := file("local.secring.gpg"),
   pgpPublicRing := file("local.pubring.gpg"),
-  scalaVersion := currentScalaVersion,
-  //crossScalaVersions := Seq("2.10.6", "2.11.5"),
   organization := organizationName,
   test in assembly := {},
   parallelExecution in Test := false,
@@ -149,14 +145,14 @@ lazy val electric = (project in file("electric"))
   .settings(coreSettings ++ electricSettings ++ publishSettings: _*) dependsOn (core)
 
 lazy val electricexamples = (project in file("electricexamples")).settings(
-  coreSettings ++ electricJobSettings ++ publishSettings: _*
+  coreSettings ++ electricJobSettings ++ noPublishSettings: _*
 ) dependsOn (electric)
 
 lazy val gas = (project in file("gas"))
   .settings(coreSettings ++ gasSettings ++ publishSettings: _*) dependsOn (core)
 
 lazy val gasexamples = (project in file("gasexamples")).settings(
-  coreSettings ++ gasJobSettings ++ publishSettings: _*
+  coreSettings ++ gasJobSettings ++ noPublishSettings: _*
 ) dependsOn (gas)
 
 lazy val biglibrary = (project in file("."))
