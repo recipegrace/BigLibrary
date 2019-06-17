@@ -7,6 +7,10 @@ val sparkVersion = "2.4.0"
 val gcsVersion = "1.40.0"
 val currentScalaVersion = "2.12.8"
 val organizationName = "com.recipegrace"
+lazy val scala212 = "2.12.8"
+lazy val scala211 = "2.11.12"
+lazy val supportedScalaVersions = List(scala212, scala211)
+scalaVersion in ThisBuild := scala212
 
 val username = System.getenv().get("SONATYPE_USERNAME")
 
@@ -118,6 +122,9 @@ val gasSettings = Seq(
     "com.google.cloud" % "google-cloud-storage" % gcsVersion
   )
 )
+val noPublishSettings = Seq(crossScalaVersions := Nil, skip in publish := true)
+
+val publishSettings = Seq(crossScalaVersions := supportedScalaVersions)
 val gasJobSettings = Seq(
   name := "GasExamples",
   publishArtifact in Test := false,
@@ -135,21 +142,25 @@ val electricJobSettings = Seq(
   )
 )
 
-lazy val core = (project in file("core")).settings(coreSettings: _*)
+lazy val core =
+  (project in file("core")).settings(coreSettings ++ publishSettings: _*)
 
 lazy val electric = (project in file("electric"))
-  .settings(coreSettings ++ electricSettings: _*) dependsOn (core)
+  .settings(coreSettings ++ electricSettings ++ publishSettings: _*) dependsOn (core)
 
 lazy val electricexamples = (project in file("electricexamples")).settings(
-  coreSettings ++ electricJobSettings ++ sparkAssemblySettings: _*
+  coreSettings ++ electricJobSettings ++ noPublishSettings: _*
 ) dependsOn (electric)
 
 lazy val gas = (project in file("gas"))
-  .settings(coreSettings ++ gasSettings: _*) dependsOn (core)
+  .settings(coreSettings ++ gasSettings ++ publishSettings: _*) dependsOn (core)
 
 lazy val gasexamples = (project in file("gasexamples")).settings(
-  coreSettings ++ gasJobSettings ++ assemblySettings: _*
+  coreSettings ++ gasJobSettings ++ noPublishSettings: _*
 ) dependsOn (gas)
 
 lazy val biglibrary = (project in file("."))
-  .settings(coreSettings: _*) aggregate (core, electric, gas)
+  .settings(
+    coreSettings ++ noPublishSettings: _*
+  )
+  .aggregate(core, electric, gas)
