@@ -15,7 +15,7 @@ after_success:
 jdk: openjdk8
 before_install:
 - openssl aes-256-cbc -K $encrypted_ddbfa6f6bd90_key -iv $encrypted_ddbfa6f6bd90_iv
-  -in secret-key.asc.enc -out secret-key.asc -d
+  -in .travis/secret-key.asc.enc -out .travis/secret-key.asc -d
 env:
   global:
   - secure: bR4eeqDJH8tDjNlCG2LfnAgk35NY8NBuS7QBEg6lBn7biLRhFrhIhUfwtX7YydswmqQnELkx91dQKgUiVB1laZUySnKhfu+BIdEk+xYDMjAmxlKFI0jCt2Tgp6XvUseT2ddZWA9lF8UIrG9xT2BFxRpa+8x70M4TLh8s3I/k07QqpKDPjZ/w16KYm0sFSH9kdN6w/F8QU2RSRDBZ8Ds/krDaFJn+Rxgteyi/A2oGxWVJjwlNtVa+rzkRsJfaqidOyAkoxKq36K2X25EVHY//GLetuTdbDmwupJ1Ygpsx0Crr8PvknS8O6oVSeASWJRKzvuzrefUn0EBW112WzKntYNCOPa8Lx+JuRGRt0OPwvoZi8IKxPNQW3R54XR0JzRsO0QLx6JrjOeSUfOYDQ6ZwPhJbjLBH9j4lVWS8AQ5Y6ziWsNbDEO5R9hCGtizaHISfgdAaQI8NPVwphXMemDt0l03usjrnA5Iohr81teIgmiK/0aPa4gmtaVtnKR2lr9eq4GkNi57ZcVBREganZKr740kTlT1u6lY/B/HbiEy+cZgnf7EKfljiBgrko36iN997j0iMQXYtxPngzy8y9qMgCPEpZpAAqDKsdhrNiBbX+Of5X13AlYl5wvcyMYDeRn8iM9QHNJfB584qe1r87aidX5jFX44A8WmdZVstF7wmano=
