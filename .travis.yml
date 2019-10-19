@@ -25,8 +25,6 @@ env:
 script:
 - sbt ++$TRAVIS_SCALA_VERSION  test
 - sbt ++$TRAVIS_SCALA_VERSION electricexamples/test
-- if [ "$TRAVIS_BRANCH" == "master" ]; then sbt ++$TRAVIS_SCALA_VERSION publishSigned;
-  fi
 notifications:
   email:
     recipients:
