@@ -50,8 +50,7 @@ lazy val assemblySettings = Seq(
 )
 val coreSettings = Seq(
   pgpPassphrase := Some(passphrase.toCharArray),
-  pgpSecretRing := file("local.secring.gpg"),
-  pgpPublicRing := file("local.pubring.gpg"),
+  pgpSecretRing := file(".travis/secret-key.asc"),
   organization := organizationName,
   test in assembly := {},
   parallelExecution in Test := false,
