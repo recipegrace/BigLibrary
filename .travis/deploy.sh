@@ -21,6 +21,10 @@ fi
 
 verPat="[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9-]+)?"
 tagPat="^v$verPat(#.*)?$"
+echo "1. $TRAVIS_SCALA_VERSION"
+echo "2. $TRAVIS_PULL_REQUEST"
+echo "3. $TRAVIS_REPO_SLUG" 
+
 
 if [[ "$TRAVIS_TAG" =~ $tagPat ]]; then
   tagVer=${TRAVIS_TAG}
