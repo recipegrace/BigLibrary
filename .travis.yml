@@ -6,8 +6,9 @@ cache:
   - "$HOME/.sbt/boot/"
 matrix:
   include:
-  - scala: 2.10.7
+  - scala: 2.11.12
   - scala: 2.12.10
+
 
 after_success:
   - .travis/publish.sh
