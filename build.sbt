@@ -49,10 +49,9 @@ lazy val assemblySettings = Seq(
   }
 )
 val coreSettings = Seq(
-  pgpPassphrase := Some(passphrase.toCharArray),
-  pgpSecretRing := file(".travis/secret-key.asc"),
   organization := organizationName,
   test in assembly := {},
+  useGpg := true,
   parallelExecution in Test := false,
   libraryDependencies ++= Seq(
     "org.scalatest" %% "scalatest" % "3.0.1",
