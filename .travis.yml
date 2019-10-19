@@ -11,7 +11,7 @@ matrix:
 
 
 after_success:
-  - .travis/publish.sh
+  - .travis/deploy.sh
 jdk: openjdk8
 before_install:
 - openssl aes-256-cbc -K $encrypted_ddbfa6f6bd90_key -iv $encrypted_ddbfa6f6bd90_iv
