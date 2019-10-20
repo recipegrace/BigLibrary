@@ -51,7 +51,6 @@ lazy val assemblySettings = Seq(
 val coreSettings = Seq(
   organization := organizationName,
   test in assembly := {},
-  useGpg := true,
   parallelExecution in Test := false,
   libraryDependencies ++= Seq(
     "org.scalatest" %% "scalatest" % "3.0.1",
