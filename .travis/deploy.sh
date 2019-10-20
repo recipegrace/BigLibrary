@@ -38,11 +38,11 @@ if [[ "$TRAVIS_TAG" =~ $tagPat ]]; then
     echo "Releasing $tagVer with Scala $TRAVIS_SCALA_VERSION"
 
     ## change this to match your encrypted key
-    openssl aes-256-cbc -K $encrypted_ddbfa6f6bd90_key -iv $encrypted_ddbfa6f6bd90_iv -in .travis/secret-key.asc.enc -out .travis/secret-key.asc -d
-    echo $PGP_PASSPHRASE | gpg --passphrase-fd 0 --batch --yes --import .travis/secret-key.asc
+    ##openssl aes-256-cbc -K $encrypted_ddbfa6f6bd90_key -iv $encrypted_ddbfa6f6bd90_iv -in .travis/secret-key.asc.enc -out .travis/secret-key.asc -d
+    echo $PGP_PASSPHRASE | gpg --passphrase-fd 0 --batch --yes --import secret-key.asc
 
     ## change this to match your build
-    sbt "$publishVersion" "clean" "+publishSigned"
+    sbt "clean" "+publishSigned"
     [ $? -eq 0 ]  || exit 1
   fi
 fi
