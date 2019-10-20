@@ -15,16 +15,13 @@
 # Everything after the `#` in the tag name is ignored.
 
 ## cross publish everything when Scala 2.12.x is selected.
-if [[ "$TRAVIS_SCALA_VERSION" =~ 2\.1[2]\..* && "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_REPO_SLUG}" == "recipegrace/BigLibrary" ]]; then
+if [[ "$TRAVIS_SCALA_VERSION" =~ 2\.1[1-2]\..* && "${TRAVIS_PULL_REQUEST}" == "false" && "${TRAVIS_REPO_SLUG}" == "recipegrace/BigLibrary" ]]; then
   echo "ready to publish"
   RELEASE_COMBO=true;
 fi
 
 verPat="[0-9]+\.[0-9]+\.[0-9]+(-[A-Za-z0-9-]+)?"
 tagPat="^v$verPat(#.*)?$"
-echo "1. $TRAVIS_SCALA_VERSION"
-echo "2. $TRAVIS_PULL_REQUEST"
-echo "3. $TRAVIS_REPO_SLUG" 
 
 
 if [[ "$TRAVIS_TAG" =~ $tagPat ]]; then
@@ -38,11 +35,10 @@ if [[ "$TRAVIS_TAG" =~ $tagPat ]]; then
     echo "Releasing $tagVer with Scala $TRAVIS_SCALA_VERSION"
 
     ## change this to match your encrypted key
-    ##openssl aes-256-cbc -K $encrypted_ddbfa6f6bd90_key -iv $encrypted_ddbfa6f6bd90_iv -in .travis/secret-key.asc.enc -out .travis/secret-key.asc -d
     echo $PGP_PASSPHRASE | gpg --passphrase-fd 0 --batch --yes --import secret-key.asc
 
     ## change this to match your build
-    sbt "clean" "+publishSigned"
-    [ $? -eq 0 ]  || exit 1
+    sbt "$publishVersion" "clean" "+publishSigned"
   fi
 fi
+exit $?
