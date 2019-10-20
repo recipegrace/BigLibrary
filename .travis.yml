@@ -27,4 +27,4 @@ notifications:
     on_failure: always
 before_install:
 - openssl aes-256-cbc -K $encrypted_ddbfa6f6bd90_key -iv $encrypted_ddbfa6f6bd90_iv
-  -in secret-key.asc.enc -out .travis/secret-key.asc -d
+  -in .travis/secret-key.asc.enc -out .travis/secret-key.asc -d
