@@ -50,6 +50,7 @@ lazy val assemblySettings = Seq(
 )
 val coreSettings = Seq(
   organization := organizationName,
+  pgpSecretRing := file("secring.gpg"),
   test in assembly := {},
   parallelExecution in Test := false,
   libraryDependencies ++= Seq(

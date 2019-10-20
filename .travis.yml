@@ -12,7 +12,7 @@ after_success:
 - ".travis/deploy.sh"
 jdk: openjdk8
 before_install:
-- openssl aes-256-cbc -K $encrypted_27c1ac0f7528_key -iv $encrypted_27c1ac0f7528_iv -in .travis/secring.gpg.enc -out ~\/.gnupg/secring.gpg -d
+- openssl aes-256-cbc -K $encrypted_27c1ac0f7528_key -iv $encrypted_27c1ac0f7528_iv -in .travis/secring.gpg.enc -out secring.gpg -d
 env:
   global:
   - secure: yEP5GOepT4zyKJpo7JzTLW7oOpCBhkG64U3tRArmtrMhqM203tk6GIJq+WJsP5mMTObCzY+csD5t9DyRp+ouxGsIquYRb/vheKonfLsAcbJu4n9HN2QHdE0oagbsrYUonEXl0gPmDcxtUM8WqoY5U6qZv8kh+jVi+GDADYB28bb4pw5NKdAgWxN7E0MabPDt79epcyt+thbEYnCmV9K3rcI/IbnAdNHY/POi5DuQrgAgoltpfA05zvCRRQZkvkRqK5Nx3iuL1MQzvM8ET+kaaqFaEidRSZoZi70HR+tcG7TCyhLvc3oIxPN+HCsfDhv/yR/HbESdbAV6dLiyrxZSaHJ2iWEKQ5MHHVfQETH/TpHY3QBhPmUdccpiaGyDKz3qX6cjBGuwBVgQQzlJ6UTTXm8nGPztdtJZiZFwB8NVF7kDpH1IIBtjiulTVPn8Eqfz8ZQjHXOFiZobytgA+uG1RyVOnPVz3VQARnUtF12hRpOPB8QMAouqRaZI01x4WoezK4SE4x+4U/RYzup2hsU1r1KJmggoRxTVnI1pXHqXZkPuYquwG42mTPhXO+8gt9HFzEJ6Lf7QUd6aUOuUVYwbufFBnLtoftOtFfN2Z0TJ9i4rbumDqgmFvj3rDRR71yf0ywEEDsai6CYxKUlj+UHAcOqaOPBGCpe2EpZ/nv2C1Eo=
