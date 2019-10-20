@@ -43,5 +43,6 @@ if [[ "$TRAVIS_TAG" =~ $tagPat ]]; then
 
     ## change this to match your build
     sbt "$publishVersion" "clean" "+publishSigned"
+    [ $? -eq 0 ]  || exit 1
   fi
 fi
